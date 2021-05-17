@@ -1,3 +1,5 @@
+from audioop import reverse
+
 from django.db import models
 
 # Create your models here.
@@ -10,7 +12,7 @@ LABEL = (('new','new'),('hot','hot'),('','default'))
 class Category(models.Model):
     name = models.CharField(max_length=200)
     logo = models.CharField(max_length=200)
-    slug = models.CharField(max_length=300)
+    slug = models.CharField(max_length=300,unique=True)
     status = models.CharField(choices= STATUS,max_length=200)
     def __str__(self):
         return self.name
@@ -57,6 +59,9 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
+    def add_to_cart(self,kwargs):
+        return reverse('cart:add-to-cart',kwargs = {'slug':slug})
+
 class Review(models.Model):
     name = models.CharField(max_length=200)
     profession = models.CharField(max_length=200)
@@ -66,5 +71,8 @@ class Review(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
 
 

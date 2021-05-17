@@ -231,10 +231,10 @@
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
-                                   <a href="/item_detail/{{new.slug}}"><img src="{{hot.image.url}}" height="200%" width="300%" alt="Product Image"> </a>
+                                   <a href="/item_detail/{{hot.slug}}"><img src="{{hot.image.url}}" height="200%" width="300%" alt="Product Image"> </a>
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{hot.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -329,11 +329,11 @@
                     <div class="col-md-6">
                         <div class="review-slider-item">
                             <div class="review-img">
-                                <img src="{{review.image.url}}" style=" height = '50px' width = '50px' " alt="Image">
+                                <img src="{{review.image.url}}"  alt="Image">
                             </div>
                             <div class="review-text">
                                 <h2>{{review.name}}</h2>
-                                <h3>Profession</h3>
+                                <h3>{{review.profession}}</h3>
                                 <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>

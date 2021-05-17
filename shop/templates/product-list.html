@@ -87,7 +87,11 @@
                                         </div>
                                     </div>
                                     <div class="product-price">
+                                        {% if item.discounted_price > 0 %}
+                                        <h3><span>Rs</span>{{item.discounted_price}}</h3>
+                                        {% else %}
                                         <h3><span>Rs</span>{{item.price}}</h3>
+                                        {% endif %}
                                         <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
                                 </div>

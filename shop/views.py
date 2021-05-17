@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.shortcuts import render
 from .models import *
 from django.views.generic import View
@@ -46,13 +48,50 @@ class ItemSearchView(BaseView):
             self.views['search_item'] = Item.objects.filter(name__icontains = search)
             return render(request,'search.html', self.views)
 
-        return render(request, 'product-list.html')
+        return render(request, 'product-list.html',self.views)
 
 class ItemDetailView(BaseView):
     def get(self,request,slug):
         self.views['item_detail'] = Item.objects.filter(slug = slug)
 
-        return render(request, 'product-list.html', self.views)
+        return render(request, 'product-detail.html', self.views)
+
+def signup(request):
+    if request.method == "POST":
+        f_name = request.POST['first_name']
+        l_name = request.POST['last_name']
+        email = request.POST['email']
+        username = request.POST['username']
+        password = request.POST['password']
+        cpassword = request.POST['cpassword']
+
+        if password == cpassword:
+            if User.objects.filter(username = username).exists():
+                messages.error(request,'This username is already taken')
+                return redirect('shop:signup')
+
+            elif User.objects.filter(email = email).exists():
+                messages.error(request,'This email is already taken')
+                return redirect('shop:signup')
+            else:
+                user = User.objects.create_user(
+                    username = username,
+                    email = email,
+                    password = password,
+                    first_name = f_name,
+                    last_name = l_name,
+                )
+                user.save()
+                messages.success(request, 'You are successfully registered.')
+                return redirect('shop:signup')
+
+        else:
+            messages.error(request,'The password does not match')
+            return redirect('shop:signup')
+
+    return render(request,'signup.html')
+
+
 
 
 
