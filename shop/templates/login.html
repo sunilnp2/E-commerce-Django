@@ -15,70 +15,138 @@
         <!-- Breadcrumb End -->
         
         <!-- Login Start -->
-        <div class="login">
-            <div class="container-fluid">
-                <form action="" method="POST">
-                <div class="row">
-                    <div class="col-lg-6">    
-                        <div class="register-form">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>First Name</label>
-<!--                                    <input class="form-control" name="first_name" type="text" placeholder="First Name">-->
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Last Name"</label>
-                                    <input class="form-control" name="last_name" type="text" placeholder="Last Name">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>E-mail</label>
-                                    <input class="form-control" type="text" placeholder="E-mail">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Mobile No</label>
-                                    <input class="form-control" type="text" placeholder="Mobile No">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Retype Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="login-form">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label>E-mail / Username</label>
-                                    <input class="form-control" type="text" placeholder="E-mail / Username">
-                                </div>
-                                <div class="col-md-6">
-                                    <label>Password</label>
-                                    <input class="form-control" type="text" placeholder="Password">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="newaccount">
-                                        <label class="custom-control-label" for="newaccount">Keep me signed in</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="btn">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    </form>
-            </div>
-        </div>
+        <h1>Sign In</h1>
+{% if messages %}
+{% for mess in messages %}
+<h1 style="color:red; font-size:14px; font-weight: bold;">{{ mess }}</h1>
+{% endfor %}
+{% endif %}
+<form class = "myform" method="POST" novalidate> 
+  {% csrf_token %}
+  {% if form.non_field_errors %}
+  {% for error in form.non_field_errors %}
+<p style="color: red; font-size:0.7em">{{error}}</p>
+  {% endfor %}
+  {% endif %}
+	<fieldset>
+ 
+    {% for field in form  %}
+	  <label for="name">{{ field.label_tag }}</label><span class="error">{{field.errors|striptags}}</span> 
+  <br>
+    {{ field }} <br>
+    {% endfor %}
+	  
+	</fieldset>
+	<button type="submit">Sign In</button>
+    <p>Don't have account? <a href="/signup">register</a></p>
+  </form>
+
+<style>
+  #id_username{
+    width:100%;
+    margin:3px;
+    padding: 5px;
+    border:1px solid red;
+    border-radius: 25px;
+  }
+  #id_password{
+    width:100%;
+    margin:2px;
+    padding: 8px;
+    border:1px solid red;
+    border-radius:26px ;
+  }
+  *, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    }
+  
+    body {
+    font-family: 'Nunito', sans-serif;
+    color: #040116;
+    font-weight: bold;
+    }
+    
+    .myform { 
+    width:60%;
+    height: auto;
+    margin: 15px auto;
+    margin-bottom: 20px;
+    padding: 10px 25px;
+    background: lightcyan;
+    border: 1px solid red ;
+    border-radius: 30px;
+     }
+    
+    h1 {
+    margin:2px;
+    text-align: center;
+    }
+    
+    button {
+    margin:5px;
+    padding: 12px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    /* margin-bottom: 10px; */
+    }
+    
+    fieldset {
+    /* margin-bottom: 30px; */
+    border: none;
+    } 
+    
+    legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+    }
+    
+    label {
+    display: inline;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    }
+    
+    label.light {
+    font-weight: 300;
+    display: inline;
+    }
+    
+    .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    font-size: 0.5em;
+    margin-right: 4px;
+    line-height: 20px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 100%;
+    }
+  
+    .error{
+      color: red;
+      font-size:13px;
+      display: inline;
+      margin-left: 10px;
+      margin-bottom: 2px;
+      font-style: italic;
+      padding-bottom: 3px;
+
+      
+    }
+</style>
         <!-- Login End -->
         
        {% endblock %}

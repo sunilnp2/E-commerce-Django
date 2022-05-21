@@ -8,6 +8,12 @@ urlpatterns = [
         path('brand/<name>',BrandView.as_view(),name = 'brand'),
         path('search',ItemSearchView.as_view(),name = 'search'),
         path('item_detail/<slug>',ItemDetailView.as_view(),name = 'item_detail'),
-        path('signup', signup,name = 'signup')
+        path('signup', signup,name = 'signup'),
+        path('login/', login,name = 'login'),
+        path('logout/', logout,name = 'logout'),
+        path('profile', profile, name='profile'),
+        path('set', setsessions,name = 'set_sesion'),
+        path('del', delsession,name = 'set_sesion'),
+        # path('checkout', checkout,name = 'checkout'),
 
 ]

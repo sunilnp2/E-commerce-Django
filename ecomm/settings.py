@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'cart',
+
 ]
 
 MIDDLEWARE = [
@@ -77,8 +78,12 @@ WSGI_APPLICATION = 'ecomm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': '4thsem_project',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -128,3 +133,11 @@ MEDIA_URL = 'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# EMAIL_BACKEND : 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST : 'smtp.gmail.com'
+# EMAIL_POST : 587
+# EMAIL_HOST_USER : 'sunil@gmail.com'
+# EMAIL_HOST_PASSWORD : ''
+# EMAIL_USE_TLS : True
+# EMAIL_USE_SSL : False

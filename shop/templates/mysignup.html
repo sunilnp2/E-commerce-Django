@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup
+    </title>
+</head>
+
+<body>
+    <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, totam? Sapiente magni minima tempore
+    accusamus. Eius nulla labore et facilis ex maiores repellat quidem excepturi provident, eum fugit eligendi minus sit
+    dolorum, adipisci tempore debitis aliquid corporis molestiae fugiat. Id, hic illum beatae ratione ullam accusamus
+    maxime, ipsa totam consectetur excepturi autem, incidunt accusantium iure. Cupiditate modi dolor magni ratione,
+    explicabo et sint nihil libero laborum rerum? Molestiae facilis qui nulla iste harum dolorem voluptas sed saepe
+    vitae animi ipsam eos temporibus fuga at, dolores eveniet molestias nesciunt dolorum deleniti expedita inventore
+    quas sit ipsa modi? Harum ab cum ullam! -->
+
+    <!-- <h1>This is second form</h1> -->
+      <!-- Signup Start
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="register-form">
+                         <form  method="post" novalidate>
+                             {% csrf_token %}
+                             {% if messages %}
+                             {% for message in messages %}
+                            <center><font color = "blue">{{message}}</font> </center>
+                             {% endfor %}
+                             {% endif %}
+                        <div class="row">
+                            {{ form.non_field_error }}
+                            <div class="col-md-10">
+                                {% for field in form  %}
+                               {{ field.label_tag }} {{ field }}  <span style = "color:red;"> {{ field.errors|striptags }} </span> <hr> <br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn" type="submit">Submit</button>
+                            </div>
+                         </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    <!-- Signup End -->
+    {% endblock %}
+</body>
+
+</html> -->

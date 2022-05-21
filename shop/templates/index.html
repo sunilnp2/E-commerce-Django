@@ -60,62 +60,62 @@
         <!-- Main Slider End -->      
         
         <!-- Brand Start -->
-        <div class="brand">
-            <div class="container-fluid">
-                <div class="brand-slider">
-            {% for brand in brands %}
-                    <div class="brand-item"><a href="/brand/{{brand.name}}"> <img src="{{brand.image.url}}" alt=""></a></div>
-                    {% endfor %}
+<!--        <div class="brand">-->
+<!--            <div class="container-fluid">-->
+<!--                <div class="brand-slider">-->
+<!--            {% for brand in brands %}-->
+<!--                    <div class="brand-item"><a href="/brand/{{brand.name}}"> <img src="{{brand.image.url}}" alt=""></a></div>-->
+<!--                    {% endfor %}-->
 
 
-                </div>
-            </div>
-        </div>
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!-- Brand End -->      
         
         <!-- Feature Start-->
-        <div class="feature">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-lg-3 col-md-6 feature-col">
-                        <div class="feature-content">
-                            <i class="fab fa-cc-mastercard"></i>
-                            <h2>Secure Payment</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur elit
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 feature-col">
-                        <div class="feature-content">
-                            <i class="fa fa-truck"></i>
-                            <h2>Worldwide Delivery</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur elit
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 feature-col">
-                        <div class="feature-content">
-                            <i class="fa fa-sync-alt"></i>
-                            <h2>90 Days Return</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur elit
-                            </p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 feature-col">
-                        <div class="feature-content">
-                            <i class="fa fa-comments"></i>
-                            <h2>24/7 Support</h2>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur elit
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="feature">-->
+<!--            <div class="container-fluid">-->
+<!--                <div class="row align-items-center">-->
+<!--                    <div class="col-lg-3 col-md-6 feature-col">-->
+<!--                        <div class="feature-content">-->
+<!--                            <i class="fab fa-cc-mastercard"></i>-->
+<!--                            <h2>Secure Payment</h2>-->
+<!--                            <p>-->
+<!--                                Lorem ipsum dolor sit amet consectetur elit-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 feature-col">-->
+<!--                        <div class="feature-content">-->
+<!--                            <i class="fa fa-truck"></i>-->
+<!--                            <h2>Worldwide Delivery</h2>-->
+<!--                            <p>-->
+<!--                                Lorem ipsum dolor sit amet consectetur elit-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 feature-col">-->
+<!--                        <div class="feature-content">-->
+<!--                            <i class="fa fa-sync-alt"></i>-->
+<!--                            <h2>90 Days Return</h2>-->
+<!--                            <p>-->
+<!--                                Lorem ipsum dolor sit amet consectetur elit-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-3 col-md-6 feature-col">-->
+<!--                        <div class="feature-content">-->
+<!--                            <i class="fa fa-comments"></i>-->
+<!--                            <h2>24/7 Support</h2>-->
+<!--                            <p>-->
+<!--                                Lorem ipsum dolor sit amet consectetur elit-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <!-- Feature End-->      
         
         <!-- Category Start-->
@@ -202,7 +202,7 @@
                         <h1>call us for any queries</h1>
                     </div>
                     <div class="col-md-6">
-                        <a href="tel:0123456789">+012-345-6789</a>
+                        <a href="tel:0123456789">+9779863573767</a>
                     </div>
                 </div>
             </div>
@@ -243,7 +243,7 @@
                                 {% if hot.discounted_price > 0 %}
                                 <h3><span>Rs</span>{{hot.discounted_price}}</h3>
                                 {% else %}
-                                 <h3><span>Rs</span>{{hot.price}}</h3>
+                                 <h3><span>Rs</span><a href="{% url 'shop:item_detail' hot.slug %}"> {{hot.price}} </a></h3>
                                 {% endif %}
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>
@@ -296,10 +296,10 @@
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
-                                   <a href="/item_detail/{{new.slug}}"> <img src="{{new.image.url}}" height="300%" width="400%" alt="Product Image"></a>
+                                    <a href="/item_detail/{{new.slug}}"> <img src="{{new.image.url}}" height="300px" width="300px" alt="Product Image"></a>
                                 </a>
                                 <div class="product-action">
-                                    <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                    <a href="{{new.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
                                     <a href="#"><i class="fa fa-heart"></i></a>
                                     <a href="#"><i class="fa fa-search"></i></a>
                                 </div>
@@ -308,7 +308,7 @@
                                 {% if new.discounted_price > 0 %}
                                 <h3><span>Rs</span>{{new.discounted_price}}</h3>
                                 {% else %}
-                                 <h3><span>Rs</span>{{new.price}}</h3>
+                                 <h3><span>Rs</span><a href="/item_detail/{{new.slug}}">{{new.price}}</a></h3>
                                 {% endif %}
                                 <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
                             </div>

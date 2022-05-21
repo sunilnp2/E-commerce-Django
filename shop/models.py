@@ -1,4 +1,4 @@
-from audioop import reverse
+from django.urls import reverse
 
 from django.db import models
 
@@ -53,14 +53,14 @@ class Item(models.Model):
     label = models.CharField(choices= LABEL,max_length=200,blank=True)
     status = models.CharField(choices= STATUS,max_length=200,blank=True)
     discription = models.TextField(blank=True)
-    slug = models.CharField(max_length=300)
+    slug = models.CharField(max_length=300,unique=True)
     specification = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
 
-    def add_to_cart(self,kwargs):
-        return reverse('cart:add-to-cart',kwargs = {'slug':slug})
+    def add_to_cart(self):
+        return reverse('cart:add-to-cart',kwargs = {'slug':self.slug})
 
 class Review(models.Model):
     name = models.CharField(max_length=200)
@@ -71,6 +71,8 @@ class Review(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 
 
