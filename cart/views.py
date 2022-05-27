@@ -12,9 +12,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.contrib.auth.decorators
 from django.contrib.auth.decorators import login_required
 
-# @method_decorator(login_required, name='dispatch')
-class AddCartView(LoginRequiredMixin,BaseView):
-    def get(self,request,slug):
+
+# ---------------------------Cart Start view-------------------------------------------
+
+@login_required()
+def addcart(request,slug):
         username = request.user.username
         price = Item.objects.get(slug = slug).price
         discounted_price = Item.objects.get(slug = slug).discounted_price
@@ -55,28 +57,23 @@ class AddCartView(LoginRequiredMixin,BaseView):
         data.save()
         return redirect('cart:cart')
 
-class CartView(BaseView):
-    def get(self,request):
-        username = request.user.username
-        self.views['my_cart'] = Cart.objects.filter(username = username,checkout = False)
-        return render(request,'cart.html',self.views)
 
-def user_cart(request):
+def show_cart(request):
+        # user  =request.user
         username = request.user.username
-        items = Cart.objects.get(items = items)
-        quantity = Cart.objects.get(quantity = quantity)
-        total = Cart.objects.get(total = total)
-        grand_total = Cart.objects.get(grand_total = grand_total)
-        fianlcart = UserCart.objects.create(
-            time = datetime.time.now(),
-            username = username,
-            items = items,
-            quantity = quantity,
-            total = total,
-            grand_total = grand_total,
-        )
-        fianlcart.save()
-        return redirect('/')
+        mycart = Cart.objects.filter(username = username,checkout = False)
+        amount = 0
+        shipping_cost = 0
+        grand_total = 0
+        cart_product = [p for p in Cart.objects.all() if p.username == username]
+        if cart_product:
+            for p in cart_product:
+                temamount = (p.quantity * p.items.price)
+                amount += temamount
+                # print(len(amount))
+                grand_total = shipping_cost + amount
+        # self.views['cart_total'] = (grand_total, amount)
+        return render(request,'cart.html',{'my_cart':mycart,'total':amount, 'grand_total':grand_total})
 
 def delete_cart(request,slug):
     username = request.user.username
@@ -90,7 +87,7 @@ def increase_cart(request,slug):
     quantity = quantity + 1
     total = price * quantity
     Cart.objects.filter(username = username,checkout = False, slug = slug).update(quantity=quantity,total = total)
-    print(total)
+    # print(total)
     return redirect('cart:cart')
 
 def dec_cart(request,slug):
@@ -109,6 +106,15 @@ def dec_cart(request,slug):
     #     print(total[i])
     
     return redirect('cart:cart')
+
+def total(request,slug):
+    username = request.user.username
+    price = Item.objects.get(slug = slug).price
+    quantity = Cart.objects.get(username = username , slug = slug, checkout = False).quantity
+    total = price * quantity
+    return render(request,'cart:cart')
+
+    # ---------------------------Cart end view-------------------------------------------
 
 def contact(request):
     if request.method == "POST":
@@ -135,14 +141,104 @@ def contact(request):
         # email.save()
 
     return render(request,'contact.html')
-def total(request,slug):
+
+
+# ---------------------------Checkout Start view-------------------------------------------
+
+def checkout(request):
+    user = request.user
+    username = request.user.username
+    mycart = Cart.objects.filter(username = username,checkout = False)
+    amount = 0
+    shipping_cost = 0
+    grand_total = 0
+    cart_product = [p for p in Cart.objects.all() if p.username == username]
+    if cart_product:
+            for p in cart_product:
+                temamount = (p.quantity * p.items.price)
+                amount += temamount
+                grand_total = shipping_cost + amount
+            # self.views['cart_total'] = (grand_total, amount)
+    checkuser  = User.objects.all()
+    # return render(reque st, 'checkout.html', self.views)
+    return render(request,'mycheckout.html',{'my_cart':mycart,'total':amount, 'grand_total':grand_total, 'user':checkuser})
+
+
+def payment(request):
+    username = request.user.username
+    cart = Cart.objects.filter(username = username , checkout = False)
+    for c in cart:
+        if c is None:
+            messages.info(request, "You can't Order without product")
+            return redirect('cart:checkout')
+        else:
+            OrderItem(username = username, item = c.items , price = c.items.price, quantity = c.quantity , total = c.total).save()
+            c.delete()
+            return redirect('cart:orders')
+        
+#----------------------------Checkout end view-------------------------------------------
+
+#----------------------------Order Start view-------------------------------------------
+
+
+def orders(request):
+    user = request.user
+    orderstatus = OrderItem.objects.all()
+    return render(request, 'orders.html', {'orderstatus':orderstatus})
+
+#----------------------------Order end view-------------------------------------------
+
+
+# ---------------------------wishlist start view-------------------------------------------
+@login_required()
+def add_wishlist(request, slug):
     username = request.user.username
     price = Item.objects.get(slug = slug).price
-    quantity = Cart.objects.get(username = username , slug = slug, checkout = False).quantity
-    total = price * quantity
-    return render(request,'cart:cart')
+    discounted_price = Item.objects.get(slug = slug).discounted_price
+    if discounted_price > 0 :
+        original_price = discounted_price
+    else:
+        original_price = price
 
-class CheckoutView(BaseView):
-    def get(self,request):
-        self.views['check'] = User.objects.all()
-        return render(request, 'checkout.html', self.views)
+    quantity = 1
+
+    data = WishList.objects.create(
+        username = username,
+        items = Item.objects.filter(slug = slug)[0], 
+        slug = slug, 
+        price = price,
+        quantity = quantity
+    )
+    data.save()
+    return redirect('cart:wishlist')
+
+def wish_inc(request, slug):
+    username = request.user.username
+    quantity = WishList.objects.get(username = username , slug = slug).quantity
+    quantity = quantity + 1
+    WishList.objects.filter(username = username,slug = slug).update(quantity = quantity)
+    return redirect('cart:wishlist')
+
+    
+def wish_dec(request, slug):
+    username = request.user.username
+    quantity = WishList.objects.get(username = username , slug = slug).quantity
+    quantity = quantity - 1
+    WishList.objects.filter(username = username,slug = slug).update(quantity = quantity)
+    return redirect('cart:wishlist')
+
+def wish_delete(request, slug):
+    username = request.user.username
+    WishList.objects.filter(username = username , slug = slug).delete()
+    return redirect('cart:wishlist')
+
+
+
+class WishListView(BaseView):
+    def get(self, request):
+        username = request.user.username
+        self.views['mywish'] = WishList.objects.filter(username  = username)
+        return render(request, 'wishlist.html', self.views)
+
+
+# ---------------------------wishlist end view-------------------------------------------

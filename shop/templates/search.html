@@ -6,7 +6,7 @@
         <div class="breadcrumb-wrap">
             <div class="container-fluid">
                 <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Home</a></li>
                     <li class="breadcrumb-item"><a href="#">Products</a></li>
                     <li class="breadcrumb-item active">Product List</li>
                 </ul>
@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="product-view-top">
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-4">
                                             <div class="product-search">
                                                 <input type="email" value="Search">
@@ -46,35 +46,32 @@
                                                 <div class="dropdown">
                                                     <div class="dropdown-toggle" data-toggle="dropdown">Product price range</div>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a href="#" class="dropdown-item">$0 to $50</a>
-                                                        <a href="#" class="dropdown-item">$51 to $100</a>
-                                                        <a href="#" class="dropdown-item">$101 to $150</a>
-                                                        <a href="#" class="dropdown-item">$151 to $200</a>
-                                                        <a href="#" class="dropdown-item">$201 to $250</a>
-                                                        <a href="#" class="dropdown-item">$251 to $300</a>
-                                                        <a href="#" class="dropdown-item">$301 to $350</a>
-                                                        <a href="#" class="dropdown-item">$351 to $400</a>
-                                                        <a href="#" class="dropdown-item">$401 to $450</a>
-                                                        <a href="#" class="dropdown-item">$451 to $500</a>
+                                                        <a href="#" class="dropdown-item">100 to 500</a>
+                                                        <a href="#" class="dropdown-item">500 to 1000</a>
+                                                        <a href="#" class="dropdown-item">1000 to 10000</a>
+                                                        <a href="#" class="dropdown-item">10k to 1 Lakhs</a>
+                                                        <a href="#" class="dropdown-item">1 Lakhs plus</a>
+            
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
+                            {% if search_item %}
                     {% for item in search_item %}
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
                                         <a href="#">{{item.name}}</a>
-                                        <div class="ratting">
+                                        <!-- <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
@@ -82,8 +79,8 @@
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-search"></i></a>
+                                            <!-- <a href="#"><i class="fa fa-heart"></i></a>
+                                            <a href="#"><i class="fa fa-search"></i></a> -->
                                         </div>
                                     </div>
                                     <div class="product-price">
@@ -97,10 +94,13 @@
                                 </div>
                             </div>
                             {% endfor %}
+                            
 
 
                         </div>
-
+                        {% else %}
+                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;">Search Not Found !!</h3>
+                        {% endif %}
                         <!-- Pagination Start -->
                         <div class="col-md-12">
                             <nav aria-label="Page navigation example">
@@ -123,7 +123,7 @@
                     <!-- Side Bar Start -->
                     <div class="col-lg-4 sidebar">
                         <div class="sidebar-widget category">
-                            <h2 class="title">Category</h2>
+                            <h2 class="title"> Flter By Category</h2>
                             <nav class="navbar bg-light">
                                 <ul class="navbar-nav">
                                     {% for cat in category %}
@@ -136,18 +136,18 @@
                             </nav>
                         </div>
 
-                        <div class="sidebar-widget widget-slider">
+                        <!-- <div class="sidebar-widget widget-slider">
                             <div class="sidebar-slider normal-slider">
                                 <div class="product-item">
                                     <div class="product-title">
                                         <a href="#">Product Name</a>
-                                        <div class="ratting">
+                                         <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> 
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
@@ -217,33 +217,20 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="sidebar-widget brands">
+                        <!-- <div class="sidebar-widget brands">
                             <h2 class="title">Our Brands</h2>
                             <ul>
-<!--                                {% for brand in brands %}-->
-                                <li><a href="#">First </a><span>(45)</span></li>
-<!--                                {% endfor %}-->
+                               {% for brand in brands %}
+                                <li><a href="{% url 'shop:brand' brand.name %}">{{ brand.name}} </a><span></span></li>
+                               {% endfor %}
 
                             </ul>
-                        </div>
+                        </div> -->
 
-                        <div class="sidebar-widget tag">
-                            <h2 class="title">Tags Cloud</h2>
-                            <a href="#">Lorem ipsum</a>
-                            <a href="#">Vivamus</a>
-                            <a href="#">Phasellus</a>
-                            <a href="#">pulvinar</a>
-                            <a href="#">Curabitur</a>
-                            <a href="#">Fusce</a>
-                            <a href="#">Sem quis</a>
-                            <a href="#">Mollis metus</a>
-                            <a href="#">Sit amet</a>
-                            <a href="#">Vel posuere</a>
-                            <a href="#">orci luctus</a>
-                            <a href="#">Nam lorem</a>
-                        </div>
+        
+                     
                     </div>
                     <!-- Side Bar End -->
                 </div>
@@ -252,7 +239,7 @@
         <!-- Product List End -->
 
         <!-- Brand Start -->
-        <div class="brand">
+        <!-- <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
                     <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
@@ -263,7 +250,7 @@
                     <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Brand End -->
 
       {% endblock %}

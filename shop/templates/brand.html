@@ -21,7 +21,7 @@
                     <div class="col-lg-8">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="product-view-top">
+                                <!-- <div class="product-view-top">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="product-search">
@@ -61,24 +61,24 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                     {% for item in brand_items %}
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="#">{{item.name}}</a>
-                                        <div class="ratting">
+                                        <a href="{% url 'shop:item_detail' item.slug %}">{{item.name}}</a>
+                                        <!-- <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="product-image">
-                                        <a href="product-detail.html">
-                                            <img src="{{item.image.url}}" alt="Product Image">
+                                        <!-- <a href="product-detail.html"> -->
+                                            <a href="{% url 'shop:item_detail' item.slug %}"></a><img src="{{item.image.url}}" alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="#"><i class="fa fa-cart-plus"></i></a>
@@ -123,7 +123,7 @@
                     <!-- Side Bar Start -->
                     <div class="col-lg-4 sidebar">
                         <div class="sidebar-widget category">
-                            <h2 class="title">Category</h2>
+                            <h2 class="title">See By Category</h2>
                             <nav class="navbar bg-light">
                                 <ul class="navbar-nav">
                                     {% for cat in category %}
@@ -136,7 +136,7 @@
                             </nav>
                         </div>
 
-                        <div class="sidebar-widget widget-slider">
+                        <!-- <div class="sidebar-widget widget-slider">
                             <div class="sidebar-slider normal-slider">
                                 {% for brand in brand_items %}
                                 <div class="product-item">
@@ -172,19 +172,19 @@
                                 {% endfor %}
 
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="sidebar-widget brands">
                             <h2 class="title">Our Brands</h2>
                             <ul>
                                 {% for brand in brands %}
-                                <li><a href="/brand/{{brand.name}}">{{brand.name}} <img src="{{brand.image.url}}"> </a><span>(45)</span></li>
+                                <li><a href="/brand/{{brand.name}}">{{brand.name}}</a><span>(45)</span></li>
                                 {% endfor %}
 
                             </ul>
                         </div>
 
-                        <div class="sidebar-widget tag">
+                        <!-- <div class="sidebar-widget tag">
                             <h2 class="title">Tags Cloud</h2>
                             <a href="#">Lorem ipsum</a>
                             <a href="#">Vivamus</a>
@@ -198,7 +198,7 @@
                             <a href="#">Vel posuere</a>
                             <a href="#">orci luctus</a>
                             <a href="#">Nam lorem</a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- Side Bar End -->
                 </div>
@@ -207,7 +207,7 @@
         <!-- Product List End -->
 
         <!-- Brand Start -->
-        <div class="brand">
+        <!-- <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
                     <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
@@ -218,7 +218,7 @@
                     <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Brand End -->
 
       {% endblock %}

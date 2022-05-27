@@ -22,10 +22,10 @@
                             {% for slider in sliders %}
                             <div class="header-slider-item">
                                 <img src="{{slider.image.url}}"   alt="Slider Image" />
-                                <div class="header-slider-caption">
+                                <!-- <div class="header-slider-caption">
                                     <p>{{slider.description}}</p>
                                     <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Shop Now</a>
-                                </div>
+                                </div> -->
                             </div>
                             {% endfor %}
 
@@ -60,17 +60,17 @@
         <!-- Main Slider End -->      
         
         <!-- Brand Start -->
-<!--        <div class="brand">-->
-<!--            <div class="container-fluid">-->
-<!--                <div class="brand-slider">-->
-<!--            {% for brand in brands %}-->
-<!--                    <div class="brand-item"><a href="/brand/{{brand.name}}"> <img src="{{brand.image.url}}" alt=""></a></div>-->
-<!--                    {% endfor %}-->
+        <div class="brand">
+           <div class="container-fluid">
+               <div class="row row-list">
+           {% for brand in brands %}
+                   <div class="brand-item" style="margin-left:80px;"><a href="/brand/{{brand.name}}"> <img src="{{brand.image.url}}" alt=""></a></div>
+                   {% endfor %}
 
 
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+               </div>
+           </div>
+       </div>
         <!-- Brand End -->      
         
         <!-- Feature Start-->
@@ -119,7 +119,7 @@
         <!-- Feature End-->      
         
         <!-- Category Start-->
-        <div class="category">
+        <!-- <div class="category">
             <div class="container-fluid">
                 <div class="row">
                      {% for ad in ads %}
@@ -191,7 +191,7 @@
             </div>
 
 
-        </div>
+        </div> -->
         <!-- Category End-->       
         
         <!-- Call to Action Start -->
@@ -221,22 +221,22 @@
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="/item_detail/{{hot.slug}}">{{hot.name}}</a>
-                                <div class="ratting">
+                                <!-- <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
-                                   <a href="/item_detail/{{hot.slug}}"><img src="{{hot.image.url}}" height="200%" width="300%" alt="Product Image"> </a>
+                                   <a href="/item_detail/{{hot.slug}}"><img src="{{hot.image.url}}" width="300%" alt="Product Image"> </a>
                                 </a>
                                 <div class="product-action">
                                     <a href="{{hot.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
-                                    <a href="#"><i class="fa fa-search"></i></a>
+                                    <a href="{% url 'cart:add-wishlist' hot.slug %}"><i class="fa fa-heart"></i></a>
+                                    {% comment %} <a href="{% url 'shop:search' %}"><i class="fa fa-search"></i></a> {% endcomment %}
                                 </div>
                             </div>
                             <div class="product-price">
@@ -286,13 +286,13 @@
                         <div class="product-item">
                             <div class="product-title">
                                 <a href="/item_detail/{{new.slug}}">{{new.name}}</a>
-                                <div class="ratting">
+                                {% comment %} <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
-                                </div>
+                                </div> {% endcomment %}
                             </div>
                             <div class="product-image">
                                 <a href="product-detail.html">
@@ -334,13 +334,13 @@
                             <div class="review-text">
                                 <h2>{{review.name}}</h2>
                                 <h3>{{review.profession}}</h3>
-                                <div class="ratting">
+                               <!-- <div class="ratting">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
-                                </div>
+                                </div>  -->
                                 <p>
                                    {{review.discription}}
                                 </p>

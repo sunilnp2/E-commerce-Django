@@ -50,11 +50,21 @@ class BrandView(BaseView):
 class ItemSearchView(BaseView):
     def get(self,request):
         search = request.GET.get('search', None)
-        if search is None:
-            return redirect('/')
-        else:
+        if search:
             self.views['search_item'] = Item.objects.filter(name__icontains = search)
+            # self.views['range-hund'] = Item.objects.filter
+            # (Item.price <= 500)
+            # self.views['range-thou'] = Item.objects.filter
+            # (Item.price > 500 or Item.price <=1000)
+            # self.views['range-ten-thou'] = Item.objects.filter
+            # (Item.price > 1000 or Item.price <=10000)
+            # self.views['range-lakh'] = Item.objects.filter
+            # (Item.price > 10000 or Item.price <= 100000)
+            # self.views['range-lakh-plus'] = Item.objects.filter
+            # (Item.price > 100000)
             return render(request,'search.html', self.views)
+        else:
+            return redirect('shop:home')
 
 
 class ItemDetailView(BaseView):
@@ -152,16 +162,32 @@ def profile(request):
 
 
 def setcookie(request):
+    user = request.user
+    fname = request.user.first_name
+    lname = request.user.last_name
+    email = request.user.email
     username = request.user.username
-    response = render(request, 'index.html')
-    response.set_cookie('name','username')
-    return response
+    response = redirect('/')
+    if user.is_authenticated:
+        response.set_cookie('name',f'{fname}{lname}',max_age = 365 * 24 * 60 * 60 ),
+        ('email', email)
+        # response.set_cookie('email',email)
+        return response
+    else:
+        return redirect('signup/')
 
 
 def setsessions(request):
-    request.session['f_name'] = 'Sunil'
-    request.session['l-name'] = 'Nepali'
-    # request.session.set_expirey(600)
+    # uname = request.user.username
+    user = request.user
+    fname = request.user.first_name
+    lname = request.user.last_name
+    email = request.user.email
+    if user.is_authenticated:
+        request.session['f_name'] = fname
+        request.session['l-name'] = lname
+        request.session['email'] = email
+        # request.session.set_expirey(600)
     return render(request,'index.html')
 
 def delsession(request):

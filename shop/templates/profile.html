@@ -33,10 +33,14 @@
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                      MR/S. {{user.first_name}} {{user.last_name}}  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp<button> <a href = "{% url 'shop:logout' %}">LogOut</a></button>
+                                      {{user.first_name}} {{user.last_name}} &nbsp &nbsp
                                     </h5>
                                     <h6>
-                                        Web Developer and Designer
+                                        Web Developer and Designer <br>
+                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:cart' %}"> MyCart</a></button>
+                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:orders' %}">My Orders</a></button>
+                                        <button style="background-color:lightgray; color: red;"><a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:wishlist' %}">My WishList</a></button>
+                                        <button style="background-color:lightgray; "><a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'shop:logout' %}">LogOut</a></button>
                                     </h6>
                                     <p class="proile-rating">Address : <span>Kathmandu</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -92,7 +96,8 @@
                                                 <label>Name : </label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p{{user.first_name}} {{user.last_name}}</p>
+                                                {% comment %} {% if user.is_authenticated %} {% endcomment %}
+                                                {{user.first_name}} {{user.last_name}}
                                             </div>
                                         </div>
                                         <div class="row">

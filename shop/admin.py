@@ -9,5 +9,7 @@ admin.site.register(Brand)
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('name' , 'price' , 'category')
     list_display_links = ('name', 'price', 'category')
+    list_per_page = 15
+    ordering = ['name']
 admin.site.register(Item,ItemAdmin)
 admin.site.register(Review)

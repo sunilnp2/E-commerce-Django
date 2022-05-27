@@ -22,12 +22,12 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="product-view-top">
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="col-md-4">
                                             <div class="product-search">
                                                 <input type="email" value="Search">
                                                 <button><i class="fa fa-search"></i></button>
-                                            </div>
+                                            </div> 
                                         </div>
                                         <div class="col-md-4">
                                             <div class="product-short">
@@ -60,28 +60,21 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                     {% for item in cat_items %}
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="#">{{item.name}}</a>
-                                        <div class="ratting">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
+                                        <a href="{% url 'shop:item_detail' item.slug %}">{{item.name}}</a>
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
                                             <img src="{{item.image.url}}" alt="Product Image">
                                         </a>
                                         <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{{item.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
                                             <a href="#"><i class="fa fa-heart"></i></a>
                                             <a href="#"><i class="fa fa-search"></i></a>
                                         </div>
@@ -135,7 +128,7 @@
                                 </ul>
                             </nav>
                         </div>
-
+<!-- 
                         <div class="sidebar-widget widget-slider">
                             <div class="sidebar-slider normal-slider">
                                 {% for cat in cat_items %}
@@ -155,7 +148,7 @@
                                             <img src="{{cat.image.url}}" alt="Product Image">
                                         </a>
                                         <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="cart:add_to_cart"><i class="fa fa-cart-plus"></i></a>
                                             <a href="#"><i class="fa fa-heart"></i></a>
                                             <a href="#"><i class="fa fa-search"></i></a>
                                         </div>
@@ -166,15 +159,15 @@
                                         {% else %}
                                         <h3><span>Rs</span>{{cat.price}}</h3
                                             {% endif %}
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        <a class="btn" href="add_to_cart"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
                                 </div>
                                 {% endfor %}
 
                             </div>
-                        </div>
+                        </div> -->
 
-                        <div class="sidebar-widget brands">
+                        <!-- <div class="sidebar-widget brands">
                             <h2 class="title">Our Brands</h2>
                             <ul>
                                 {% for brand in brands %}
@@ -182,23 +175,9 @@
                                 {% endfor %}
 
                             </ul>
-                        </div>
+                        </div> -->
 
-                        <div class="sidebar-widget tag">
-                            <h2 class="title">Tags Cloud</h2>
-                            <a href="#">Lorem ipsum</a>
-                            <a href="#">Vivamus</a>
-                            <a href="#">Phasellus</a>
-                            <a href="#">pulvinar</a>
-                            <a href="#">Curabitur</a>
-                            <a href="#">Fusce</a>
-                            <a href="#">Sem quis</a>
-                            <a href="#">Mollis metus</a>
-                            <a href="#">Sit amet</a>
-                            <a href="#">Vel posuere</a>
-                            <a href="#">orci luctus</a>
-                            <a href="#">Nam lorem</a>
-                        </div>
+                    
                     </div>
                     <!-- Side Bar End -->
                 </div>

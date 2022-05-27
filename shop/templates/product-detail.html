@@ -39,13 +39,13 @@
                                 <div class="col-md-7">
                                     <div class="product-content">
                                         <div class="title"><h2>{{item.name}}</h2></div>
-                                        <div class="ratting">
+                                        <!-- <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> -->
                                         <div class="price">
                                             <h4>Price:</h4>
                                             <p>Rs.{{item.price}}</p>
@@ -76,8 +76,8 @@
                                             </div>  {% endcomment %}
                                         </div>
                                         <div class="action">
-                                            <a class="btn" href="cart/add-to-cart/{{item.slug}}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
-                                            <a class="btn" href="#"><i class="fa fa-shopping-bag"></i>Buy Now</a>
+                                            <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
+                                            <a class="btn" href="{% url 'cart:add-wishlist' item.slug %}"><i class="fa fa-heart"></i>Add To WishList</a>
                                         </div>
                                     </div>
                                 </div>
@@ -116,26 +116,26 @@
                                     <div id="reviews" class="container tab-pane fade">
                                         <div class="reviews-submitted">
                                             <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
-                                            <div class="ratting">
+                                            <!-- <div class="ratting">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                            </div>
+                                            </div> -->
                                             <p>
                                                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
                                             </p>
                                         </div>
                                         <div class="reviews-submit">
                                             <h4>Give your Review:</h4>
-                                            <div class="ratting">
+                                            <!-- <div class="ratting">
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                            </div>
+                                            </div> -->
                                             <div class="row form">
                                                 <div class="col-sm-6">
                                                     <input type="text" placeholder="Name">
@@ -157,7 +157,7 @@
                         </div>
                         {% endfor %}
                         
-                        <div class="product">
+                        <!-- <div class="product">
                             <div class="section-header">
                                 <h1>Related Products</h1>
                             </div>
@@ -195,7 +195,7 @@
                                 {% endfor %}
                                 
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <!-- Side Bar Start -->
