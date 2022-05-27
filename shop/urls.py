@@ -14,8 +14,8 @@ urlpatterns = [
         path('profile', profile, name='profile'),
         path('setcookie', setcookie, name = 'setcookie'),
         # path('delcookie', delcookie, name = 'delcookie'),
-        path('set', setsessions,name = 'set_sesion'),
-        path('del', delsession,name = 'set_sesion'),
+        path('setsession', setsession,name = 'setsesion'),
+        path('delsesion', delsession,name = 'delsesion'),
         # path('checkout', checkout,name = 'checkout'),
 
 ]

@@ -62,9 +62,14 @@
         <!-- Brand Start -->
         <div class="brand">
            <div class="container-fluid">
+               <h1 style="text-align:center; margin-top: 10px;">Our Brands</h1>
+               <hr style="
+                border-top: 3px solid black;">
                <div class="row row-list">
            {% for brand in brands %}
-                   <div class="brand-item" style="margin-left:80px;"><a href="/brand/{{brand.name}}"> <img src="{{brand.image.url}}" alt=""></a></div>
+                   <div class="brand-item" style="margin-left:130px;"><a href="/brand/{{brand.name}}"> 
+                       <p style="color: black; font-weight:bold;">{{brand.name}}</p>
+                       <img src="{{brand.image.url}}" alt="" width="90" height="65"></a></div>
                    {% endfor %}
 
 

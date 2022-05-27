@@ -7,8 +7,8 @@
             <div class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
-                    <li class="breadcrumb-item active">Product List</li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Products</a></li>
+                    <!-- <li class="breadcrumb-item active">Product List</li> -->
                 </ul>
             </div>
         </div>
@@ -186,7 +186,7 @@
         <!-- Product List End -->
 
         <!-- Brand Start -->
-        <div class="brand">
+        <!-- <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
                     <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
@@ -197,7 +197,7 @@
                     <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Brand End -->
 
       {% endblock %}

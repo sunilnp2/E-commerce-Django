@@ -58,7 +58,7 @@
                                                 <button class="btn-plus"><i class="fa fa-plus"></i></button>
                                             </div>
                                         </div>
-                                        <div class="p-size">
+                                        <!-- <div class="p-size">
                                             <h4>Size:</h4>
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" class="btn">S</button>
@@ -66,15 +66,15 @@
                                                 <button type="button" class="btn">L</button>
                                                 <button type="button" class="btn">XL</button>
                                             </div> 
-                                        </div>
-                                        <div class="p-color">
+                                        </div> -->
+                                        <!-- <div class="p-color">
                                             {% comment %} <h4>Color:</h4>
                                             <div class="btn-group btn-group-sm">
                                                 <button type="button" class="btn">White</button>
                                                 <button type="button" class="btn">Black</button>
                                                 <button type="button" class="btn">Blue</button>
                                             </div>  {% endcomment %}
-                                        </div>
+                                        </div> -->
                                         <div class="action">
                                             <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Add to Cart</a>
                                             <a class="btn" href="{% url 'cart:add-wishlist' item.slug %}"><i class="fa fa-heart"></i>Add To WishList</a>
@@ -94,9 +94,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="pill" href="#specification">Specification</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" data-toggle="pill" href="#reviews">Reviews (1)</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
 
                                 <div class="tab-content">
@@ -113,29 +113,29 @@
                                             
                                         </ul>
                                     </div>
-                                    <div id="reviews" class="container tab-pane fade">
+                                    <!-- <div id="reviews" class="container tab-pane fade">
                                         <div class="reviews-submitted">
                                             <div class="reviewer">Phasellus Gravida - <span>01 Jan 2020</span></div>
-                                            <!-- <div class="ratting">
+                                             <div class="ratting">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                            </div> -->
+                                            </div> 
                                             <p>
                                                 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
                                             </p>
                                         </div>
                                         <div class="reviews-submit">
                                             <h4>Give your Review:</h4>
-                                            <!-- <div class="ratting">
+                                             <div class="ratting">
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
                                                 <i class="far fa-star"></i>
-                                            </div> -->
+                                            </div> 
                                             <div class="row form">
                                                 <div class="col-sm-6">
                                                     <input type="text" placeholder="Name">
@@ -151,7 +151,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -214,8 +214,8 @@
                                 </ul>
                             </nav>
                         </div>
-                        {% comment %} {% for hot in hots %}
-                        <div class="sidebar-widget widget-slider">
+                        <!-- {% comment %} {% for hot in hots %} -->
+                        <!-- <div class="sidebar-widget widget-slider">
                             <div class="sidebar-slider normal-slider">
                                 <div class="product-item">
                                     <div class="product-title">
@@ -244,8 +244,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {% endfor %} {% endcomment %}
+                        </div> -->
+                        <!-- {% endfor %} {% endcomment %} -->
                         
                         <div class="sidebar-widget brands">
                             <h2 class="title">Our Brands</h2>
@@ -265,7 +265,7 @@
         <!-- Product Detail End -->
         
         <!-- Brand Start -->
-        <div class="brand">
+        <!-- <div class="brand">
             <div class="container-fluid">
                 <div class="brand-slider">
                     <div class="brand-item"><img src="img/brand-1.png" alt=""></div>
@@ -276,7 +276,7 @@
                     <div class="brand-item"><img src="img/brand-6.png" alt=""></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Brand End -->
         
       {% endblock %}

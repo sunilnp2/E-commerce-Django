@@ -163,32 +163,35 @@ def profile(request):
 
 def setcookie(request):
     user = request.user
-    fname = request.user.first_name
-    lname = request.user.last_name
-    email = request.user.email
-    username = request.user.username
-    response = redirect('/')
     if user.is_authenticated:
-        response.set_cookie('name',f'{fname}{lname}',max_age = 365 * 24 * 60 * 60 ),
-        ('email', email)
+        fname = request.user.first_name
+        lname = request.user.last_name
+        email = request.user.email
+        username = request.user.username
+        response = redirect('shop:home')
+        response.set_cookie('user_info',f'Full Name : {fname}{lname}  Username : {username}  Email : {email}',max_age = 365 * 24 * 60 * 60 )
         # response.set_cookie('email',email)
         return response
     else:
-        return redirect('signup/')
+        return redirect('shop:login')
 
 
-def setsessions(request):
+def setsession(request):
     # uname = request.user.username
     user = request.user
-    fname = request.user.first_name
-    lname = request.user.last_name
-    email = request.user.email
     if user.is_authenticated:
+        fname = request.user.first_name
+        lname = request.user.last_name
+        email = request.user.email
+
         request.session['f_name'] = fname
-        request.session['l-name'] = lname
-        request.session['email'] = email
+        request.session.set_expiry(365 * 24 * 60 * 60 )
+        # request.session['l-name'] = lname
+        # request.session['email'] = email
         # request.session.set_expirey(600)
-    return render(request,'index.html')
+        return redirect('shop:home')
+    else:
+        return redirect('shop:login')
 
 def delsession(request):
     request.session.flush()

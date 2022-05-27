@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Products</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">Products</a></li>
                     <li class="breadcrumb-item active">Cart</li>
                 </ul>
             </div>
@@ -61,8 +61,8 @@
                                         </tr>
                                     {% endfor %}
                                     {% else %}
-                                            <td colspan="5" style="color: red; font-weight: bold;">You not added anything at cart
-                                            <a href="{% url 'shop:home' %}" style="font-weight: bold; color:rgb(36, 4, 152); font-size: 1.3em; border: 2px solid seagreen;">Add Some Items 🙂</a></td>
+                                            <td colspan="5" style="color: red; font-weight: bold;">Your Shopping Cart is empty
+                                            <a class='fas fa-angle-double-right' href="{% url 'shop:home' %}" style="font-weight: bold; color:rgb(36, 4, 152); font-size: 1.3em; border: 2px solid lightgray;">Add Products </a></td>
                                             {% endif%}
                                     
 

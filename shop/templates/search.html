@@ -99,10 +99,11 @@
 
                         </div>
                         {% else %}
-                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;">Search Not Found !!</h3>
+                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;"> Your Search Not Found !!</h3>
                         {% endif %}
                         <!-- Pagination Start -->
-                        <div class="col-md-12">
+                        <!-- show product in order one page 10 product like -->
+                        <!-- <div class="col-md-12">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item disabled">
@@ -116,11 +117,12 @@
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div> -->
                         <!-- Pagination Start -->
                     </div>
 
                     <!-- Side Bar Start -->
+                    {% if search_item %}
                     <div class="col-lg-4 sidebar">
                         <div class="sidebar-widget category">
                             <h2 class="title"> Flter By Category</h2>
@@ -232,6 +234,7 @@
         
                      
                     </div>
+                    {% endif  %}
                     <!-- Side Bar End -->
                 </div>
             </div>

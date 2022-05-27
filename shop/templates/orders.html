@@ -70,8 +70,9 @@
 
                         <div class="dropdown-menu">
 
-                            <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
                             <a href="orders/" class="dropdown-item">MyOrders</a>
+                            <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My Wishlist</a>
+                            <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -197,7 +198,7 @@
                                     {% else %}
                                     <td colspan="5" style="color:red; font-weight: bold; text-align: center; font-size: 1.5em;">
                                         You are not ordered anything 
-                                    <a href="{% url 'cart:cart' %}">Go to Cart</a>
+                                    <a class='fas fa-angle-double-right' style='font-size:1.3em; border:2px solid gray;' href="{% url 'shop:home' %}">Add Products</a>
                                 </td>
                                     {% endif %}
                                 </tbody>

@@ -56,8 +56,9 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
           <div class="navbar-nav mr-auto">
             <a href="/" class="nav-item nav-link active">Home</a>
+            {% if user.is_superuser %}
             <a href="http://127.0.0.1:8000/admin" target="_blank" class="nav-item nav-link active">Admin Panel</a>
-
+{% endif %}
           </div>
         </div>
         {% if request.user.is_authenticated %}
@@ -69,8 +70,9 @@
 
             <div class="dropdown-menu">
 
-              <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
               <a href="{% url 'cart:orders' %}" class="dropdown-item">My Orders</a>
+              <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My Wishlist</a>
+              <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
             </div>
           </div>
         </div>
