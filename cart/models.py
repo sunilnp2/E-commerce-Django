@@ -11,6 +11,10 @@ ostatus = (
   ('Cancelled','Cancel'),
   )
 
+PAYMETHOD = (
+    ('Pay With Khalti', 'Pay With Khalti'), 
+    ('Cash on Delivery', 'Cash on Delivery')
+)
 # Create your models here.
 class Cart(models.Model):
     username = models.CharField(max_length=500)
@@ -61,6 +65,7 @@ class OrderItem(models.Model):
     total = models.IntegerField()
     # checkout = models.BooleanField(default = False)
     time = models.DateTimeField(auto_now_add = True)
+    payment_method = models.CharField(choices= PAYMETHOD, max_length=200, default='Cash on Delivery')
     status = models.CharField(choices=ostatus, max_length=200,default='Pending')
     
 

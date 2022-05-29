@@ -9,6 +9,9 @@
   <meta content="eCommerce HTML Template Free Download" name="keywords">
   <meta content="eCommerce HTML Template Free Download" name="description">
 
+  {% comment %} for khalti payment  {% endcomment %}
+  <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+
   <!-- Favicon -->
   <link href=" {% static 'img/favicon.ico' %}" rel="icon">
 
@@ -142,6 +145,12 @@
             <div class="table-responsive">
               <table class="table table-bordered">
                 <thead class="thead-dark">
+                  <!-- {% if my_cart  == Null %} -->
+                  <h4 style = "font-weight:bold; float:right; border:2px solid blue;">
+                    <a class='fas fa-angle-double-right' style = "color:blue; " href = "{% url 'shop:home' %}">
+                        Add Product In Cart First</a>
+                    </h4>
+                    <!-- {% endif %} -->
                   <tr>
                     <th>Product Name</th>
                     <th>Price</th>
@@ -233,6 +242,7 @@
                       {% endif %}
                     </div>
                   </div>
+                  {% if my_cart %}
                   <div class="cart-summary">
                     <div class="cart-content">
                       <h1>Cart Total</h1>
@@ -241,7 +251,7 @@
                       <h2>Grand Total<span>Rs.{{grand_total}}</span></h2>
                     </div>
                     <h5 style="font-weight: bold; margin: 2x;"> Payment Method </h5>
-                    <!-- <div class="payment-method">
+                    <div class="payment-method">
                       <div class="custom-control custom-radio">
                         <input
                           type="radio"
@@ -250,25 +260,34 @@
                           name="payment"
                         />
                         <label class="custom-control-label" for="payment-4"
-                          >Khalti Pay</label
+                          ><button id="payment-button">Pay with Khalti</button>
+                          </label
                         >
                       </div>
                       <div class="payment-content" id="payment-4-show"></div>
-                    </div> -->
+                    </div> 
+                    
                     <div class="payment-method">
                       <div class="custom-control custom-radio">
-                        <input type="radio" class="custom-control-input" id="payment-5" name="payment" />
+                        <input type="radio" class="custom-control-input" id="payment-5" name="payment"/>
                         <label class="custom-control-label" for="payment-5">Cash on Delivery</label>
                       </div>
                       <div class="payment-content" id="payment-5-show"></div>
                     </div>
+                    {% comment %} <input type = "submit", value = "Your payment method"> {% endcomment %}
+                
                     <div class="cart-btn">
-                      <button style="background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Go
-                        Cart</button>
-                      <button style="background-color: rgb(212, 100, 100); color:black; font-weight:bold;">
-                        <a href="{% url 'cart:payment' %}" style="text-decoration:none;">Place Order</a></button>
+                      <div style = "display: inline;">
+                      <a href="{% url 'cart:cart' %}">
+                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Go
+                       Cart</button></a> 
+                       <a href="{% url 'cart:payment' %}" style="text-decoration:none;">
+                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Place Order</button>
+                      </a>
+                    </div>
                     </div>
                   </div>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -336,6 +355,43 @@
 
     <!-- Back to Top -->
     <!--        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>-->
+
+    {% comment %} for khalti payment  {% endcomment %}
+     <script>
+        var config = {
+            // replace the publicKey with yours
+            "publicKey": "test_public_key_dc74e0fd57cb46cd93832aee0a390234",
+            "productIdentity": "1234567890",
+            "productName": "Dragon",
+            "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+            "paymentPreference": [
+                "KHALTI",
+                "EBANKING",
+                "MOBILE_BANKING",
+                "CONNECT_IPS",
+                "SCT",
+                ],
+            "eventHandler": {
+                onSuccess (payload) {
+                    // hit merchant api for initiating verfication
+                    console.log(payload);
+                },
+                onError (error) {
+                    console.log(error);
+                },
+                onClose () {
+                    console.log('widget is closing');
+                }
+            }
+        };
+
+        var checkout = new KhaltiCheckout(config);
+        var btn = document.getElementById("payment-button");
+        btn.onclick = function () {
+            // minimum transaction amount must be 10, i.e 1000 in paisa.
+            checkout.show({amount: {{grand_total}}*100});
+        }
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

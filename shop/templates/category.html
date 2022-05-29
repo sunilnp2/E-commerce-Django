@@ -71,12 +71,12 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
-                                            <img src="{{item.image.url}}" alt="Product Image">
+                                            <img src="{{item.image.url}}" width="300" height = "300" alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="{{item.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
-                                            <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-search"></i></a>
+                                            <a href="{% url 'cart:add-wishlist' item.slug %}"><i class="fa fa-heart"></i></a>
+                                            {% comment %} <a href="#"><i class="fa fa-search"></i></a> {% endcomment %}
                                         </div>
                                     </div>
                                     <div class="product-price">
@@ -85,7 +85,7 @@
                                         {% else %}
                                         <h3><span>Rs</span>{{item.price}}</h3>
                                         {% endif %}
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
                                 </div>
                             </div>

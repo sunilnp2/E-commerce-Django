@@ -12,6 +12,7 @@ urlpatterns = [
         path('login/', login,name = 'login'),
         path('logout/', logout,name = 'logout'),
         path('profile', profile, name='profile'),
+        path('change-pass', password_change, name = "change-pass"),
         path('setcookie', setcookie, name = 'setcookie'),
         # path('delcookie', delcookie, name = 'delcookie'),
         path('setsession', setsession,name = 'setsesion'),

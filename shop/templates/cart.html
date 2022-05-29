@@ -26,6 +26,10 @@
                                         {% for mess in messages%}
                                         <center style="color:'red'">{{mess}}</center>
                                         {% endfor %}
+                                        <h4 style = "font-weight:bold; float:right; border:2px solid blue;">
+                                            <a class='fas fa-angle-double-right' style = "color:blue; " href = "{% url 'shop:home' %}">
+                                                Add Another Product</a>
+                                            </h4>
                                         <tr>
                                             <th>Product</th>
                                             <th>Price</th>

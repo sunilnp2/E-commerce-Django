@@ -1,16 +1,16 @@
 from datetime import datetime, timedelta
-from urllib import response
+from urllib import request, response
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, SetPasswordForm
 from django.forms import PasswordInput, ValidationError
 from django.shortcuts import render
 from .models import *
 from django.views.generic import View
 from django.shortcuts import redirect
-from django.contrib.auth import authenticate ,login ,logout
+from django.contrib.auth import authenticate ,login ,logout, update_session_auth_hash
 from django.contrib import auth
-from shop.forms import SignupForm, LoginForm
+from shop.forms import SignupForm, LoginForm, ChangePasswordForm
 import time
 # Create your views here.
 
@@ -122,21 +122,26 @@ class ItemDetailView(BaseView):
     # return render(request,'signup.html')
 
 def login(request):
-    if request.method == "POST":
-        fm = AuthenticationForm(request = request, data = request.POST)
-        if fm.is_valid():
-            username = fm.cleaned_data['username']
-            pw = fm.cleaned_data['password']
-            user = auth.authenticate(username = username, password = pw)
-            if user is not None:
-                auth.login(request,user)
-                return redirect('shop:profile')
-            else:
-                messages.error(request,"Your are not registered")
-                # return redirect('shop:login')
+    
+    if request.user.is_authenticated:
+        return redirect('shop:profile')
+    
     else:
-        fm = AuthenticationForm()
-    return render(request,'login.html', {'form':fm})
+        if request.method == "POST":
+            fm = AuthenticationForm(request = request, data = request.POST)
+            if fm.is_valid():
+                username = fm.cleaned_data['username']
+                pw = fm.cleaned_data['password']
+                user = auth.authenticate(username = username, password = pw)
+                if user is not None:
+                    auth.login(request,user)
+                    return redirect('shop:profile')
+                else:
+                    messages.error(request,"Your are not registered")
+                    # return redirect('shop:login')
+        else:
+            fm = AuthenticationForm()
+        return render(request,'login.html', {'form':fm})
     # if request.method == 'POST':
     #     username = fm.request.POST['username']
     #     password = fm.request.POST['password']
@@ -199,10 +204,11 @@ def delsession(request):
     return render(request,'index.html')
 
 def signup(request):
-    if request.method == "POST":
-        fm = SignupForm(request.POST)
-        if fm.is_valid():
-            fm.save()
+    
+        if request.method == "POST":
+            fm = SignupForm(request.POST)
+            if fm.is_valid():
+                fm.save()
             # username = fm.cleaned_data['username']
             # f_name = fm.cleaned_data['first_name']
             # l_name = fm.cleaned_data['last_name']
@@ -223,13 +229,30 @@ def signup(request):
             messages.success(request, f'You are Registered Successfully ')
             return redirect('shop:login')
     
-    else:
-        fm = SignupForm()
-    return render(request, 'signup.html',{'form':fm})
+        else:
+            fm = SignupForm()
+        return render(request, 'signup.html',{'form':fm})
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+def password_change(request):
+    user = request.user
+    if user.is_authenticated:
+        if request.method == 'POST':
+            fm = ChangePasswordForm(user, data = request.POST)
+            if fm.is_valid():
+                fm.save()
+                update_session_auth_hash(request, fm.user)
+                messages.success(request,'Password Change Sucessfully!')
+                return redirect('shop:profile')
+        else:
+            fm = ChangePasswordForm(user)
+        return render(request, 'change-password.html', {'form':fm})
+    else:
+        messages.error(request, 'You Need to Login first')
+        return redirect('shop:login')
 
 
 

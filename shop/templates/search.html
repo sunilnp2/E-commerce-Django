@@ -75,12 +75,12 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
-                                            <img src="{{item.image.url}}" alt="Product Image">
+                                            <img src="{{item.image.url}}" width = "300" height = "300" alt="Product Image">
                                         </a>
                                         <div class="product-action">
-                                            <a href="#"><i class="fa fa-cart-plus"></i></a>
-                                            <!-- <a href="#"><i class="fa fa-heart"></i></a>
-                                            <a href="#"><i class="fa fa-search"></i></a> -->
+                                            <a href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-cart-plus"></i></a>
+                                            <a href="{% url 'cart:add-wishlist' item.slug %}"><i class="fa fa-heart"></i></a> 
+                                          <!-- <a href="#"><i class="fa fa-search"></i></a> -->
                                         </div>
                                     </div>
                                     <div class="product-price">
@@ -99,7 +99,11 @@
 
                         </div>
                         {% else %}
-                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;"> Your Search Not Found !!</h3>
+                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;">
+                             Your Search Not Found !
+                        <a class='fas fa-angle-double-right' style = "color:blue;" href = "{% url 'shop:home' %}">
+                            Go Home </a>
+                    </h3>
                         {% endif %}
                         <!-- Pagination Start -->
                         <!-- show product in order one page 10 product like -->

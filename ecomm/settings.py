@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'shop',
     'cart',
+    'rest_framework',
+    'khalti',
 
 ]
 
@@ -134,6 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'shop:login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# khalti payment gateway
+KHALTI_SECRET_KEY = 'test_secret_key_4b85b7b0a8dc4b0fa5fb15620b335260'
+KHALTI_VERIFY_URL = 'https://khalti.com/api/v2/payment/verify'
 
 # EMAIL_BACKEND : 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST : 'smtp.gmail.com'

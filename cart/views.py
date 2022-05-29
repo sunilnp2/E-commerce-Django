@@ -168,10 +168,6 @@ def payment(request):
     username = request.user.username
     cart = Cart.objects.filter(username = username , checkout = False)
     for c in cart:
-        if c is None:
-            messages.info(request, "You can't Order without product")
-            return redirect('cart:checkout')
-        else:
             OrderItem(username = username, item = c.items , price = c.items.price, quantity = c.quantity , total = c.total).save()
             c.delete()
             return redirect('cart:orders')
@@ -199,8 +195,14 @@ def add_wishlist(request, slug):
         original_price = discounted_price
     else:
         original_price = price
-
-    quantity = 1
+    
+    if WishList.objects.filter(username = username , slug = slug).exists():
+        quantity = WishList.objects.get(username = username, slug = slug).quantity
+        quantity = quantity + 1
+        WishList.objects.filter(username = username , slug = slug).update(quantity = quantity)
+        return redirect('cart:wishlist')
+    else:
+        quantity = 1
 
     data = WishList.objects.create(
         username = username,
@@ -242,3 +244,9 @@ class WishListView(BaseView):
 
 
 # ---------------------------wishlist end view-------------------------------------------
+
+#------------------------------ Payment with khalti------------------------------------- 
+
+class KhaltiPayView(BaseView):
+    def get(self, request,*args, **kwargs):
+        return render(request, 'khalti-payment.html')

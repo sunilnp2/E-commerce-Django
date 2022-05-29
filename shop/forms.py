@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, SetPasswordForm
 from django.contrib.auth.models import User
 from django.core import validators
 from django import forms
@@ -76,3 +76,11 @@ class SignupForm(UserCreationForm):
 
  
 
+class ChangePasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(label= " Enter New Password :",
+      widget= (forms.PasswordInput(attrs= {'class':'input'})),
+      error_messages={'required':'This is required'})
+    new_password2 = forms.CharField(label= " Enter New Again :",
+     widget= (forms.PasswordInput(attrs= {'class':'input'})),
+     error_messages={'required':'This is required'})
+    fields = '__all__'
