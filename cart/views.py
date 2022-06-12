@@ -177,7 +177,7 @@ def payment(request):
         phone = request.POST.get('phone')
 
         if not fname:
-            messages.error(request,"This field is required !")
+            messages.error(request,"first name is required !")
             return redirect('cart:checkout') 
 
         elif fname.isalpha() == False:
@@ -187,14 +187,14 @@ def payment(request):
             
 
         elif not lname:
-            messages.error(request,"This field is required !")
+            messages.error(request,"last name is required !")
 
         elif lname.isalpha() == False:
             messages.error(request, "You can't input digit in lastname !")
             return redirect('cart:checkout') 
 
         elif not phone:
-            messages.error(request, "You forgot to enter phone !")
+            messages.error(request, "You forgot to enter phone Number !")
             return redirect('cart:checkout') 
         
         elif phone.isdigit() == False:
@@ -229,7 +229,7 @@ def payment(request):
                         address = add,
                         phone = phone).save()
                 c.delete()
-                return redirect('cart:orders')
+            return redirect('cart:orders')
     return redirect('cart:checkout') 
 #----------------------------Checkout end view-------------------------------------------
 
@@ -320,9 +320,9 @@ def addhistory(request):
     # email = request.user.email 
     history = OrderItem.objects.filter(username  = username, status = 'Delivered')
     for c in history:
-        OrderHistry(username = username,
-                item = c.items,
-                price = c.items.price,
+        OrderHistry.objects.create(username = username,
+                item = c.item,
+                price = c.item.price,
                 quantity = c.quantity,
                 total = c.total,
                 name = c.name,
@@ -330,7 +330,7 @@ def addhistory(request):
                 address = c.address,
                 phone = c.phone).save()
         c.delete()
-        return redirect('cart:history')
+    return redirect('cart:history')
 
 
 

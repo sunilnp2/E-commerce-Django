@@ -28,7 +28,7 @@
                                         {% endfor %}
                                         <h4 style = "font-weight:bold; float:right;">
                                             <button class = "btn"><a class='fas fa-angle-double-right' style = "color:blue; font-weight:bold; " href = "{% url 'shop:home' %}">
-                                                Add Another Product</a></button>
+                                                Continue Shopping</a></button>
                                             </h4>
                                         <tr>
                                             <th>Product</th>
@@ -44,7 +44,7 @@
                                         <tr>
                                             <td>
                                                 <div class="img">
-                                                    <a href="#"><img src="{{cart.items.image.url}}" alt="Image"></a>
+                                                    <a href="{% url 'shop:item_detail' cart.items.slug %}"><img src="{{cart.items.image.url}}" alt="Image"></a>
                                                     <p>{{cart.items.name}}</p>
                                                 </div>
                                             </td>

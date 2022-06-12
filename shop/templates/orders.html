@@ -72,9 +72,11 @@
 
                         <div class="dropdown-menu">
 
-                            <a href="orders/" class="dropdown-item">MyOrders</a>
-                            <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My Wishlist</a>
-                            <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
+                                    <a href="{% url 'cart:cart' %}" class="dropdown-item">My Cart</a>
+                                    <a href="{% url 'cart:orders' %}" class="dropdown-item">My Orders</a>
+                                    <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My WishList</a>
+                                    <a href="{% url 'cart:addhistory' %}" class="dropdown-item">Order History</a>
+                                    <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -112,6 +114,8 @@
             <div class="col-sm-5 border-end">
                 <ul class="list-unstyled">
                     <li class="btn btn-primary">Your Orders </li>
+                    <a href = "{% url 'cart:addhistory' %}"> <li class="btn btn-primary">My Order History </li></a>
+
                 </ul>
             </div>
 
@@ -141,7 +145,7 @@
                                     <tr>
                                         <td style="text-align: center; color: rgb(45, 3, 151);">
                                             <div class="img">
-                                                <a href="#" style="color: rgb(45, 3, 151); font-weight: bold;"><img src="{{os.item.image.url}}" alt="Image" height="40"
+                                                <a href="{% url 'shop:item_detail' os.item.slug %}" style="color: rgb(45, 3, 151); font-weight: bold;"><img src="{{os.item.image.url}}" alt="Image" height="40"
                                                         width="40"> {{os.item.name}}</a>
                                                 <!-- <p>{{os.item.name}}</p> -->
                                             </div>

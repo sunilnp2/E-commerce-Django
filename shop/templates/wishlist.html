@@ -17,7 +17,7 @@
                                         <tr>
                                             <th>Product</th>
                                             <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th>Brand</th>
                                             <th>Add to Cart</th>
                                             <th>Remove</th>
                                         </tr>
@@ -28,13 +28,13 @@
                                         <tr>
                                             <td>
                                                 <div class="img">
-                                                    <a href="#"><img src="{{wish.items.image.url}}" alt="Image"></a>
-                                                    <p>{{wish.items.name}}</p>
+                                                    <a href="{% url 'shop:item_detail' wish.items.slug %}"><img src="{{wish.items.image.url}}" alt="Image"></a>
+                                                    <a href="{% url 'shop:item_detail' wish.items.slug %}"> <p>{{wish.items.name}}</p></a>
                                                 </div>
                                             </td>
                                             <td>{{wish.items.price}}</td>
                                             <td>
-                                                {{wish.quantity}}
+                                                {{wish.items.brand.name}}
                                                 {% comment %} <div class="qty">
                                                     <!-- <button class="btn-minus"><a href="{% url 'cart:wish-list-dec' wish.slug %}"><i class="fa fa-minus"></i></a></button> 
                                                     <input type="text" value="{{wish.quantity}}">

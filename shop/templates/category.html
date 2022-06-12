@@ -76,6 +76,8 @@
                                         <div class="product-action">
                                             <a href="{{item.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
                                             <a href="{% url 'cart:add-wishlist' item.slug %}"><i class="fa fa-heart"></i></a>
+                                            <a href="{% url 'shop:item_detail' item.slug %}" style = "width:60px;">Detail</a>
+
                                             {% comment %} <a href="#"><i class="fa fa-search"></i></a> {% endcomment %}
                                         </div>
                                     </div>

@@ -73,8 +73,10 @@
 
             <div class="dropdown-menu">
 
+              <a href="{% url 'cart:cart' %}" class="dropdown-item">My Cart</a>
               <a href="{% url 'cart:orders' %}" class="dropdown-item">My Orders</a>
-              <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My Wishlist</a>
+              <a href="{% url 'cart:wishlist' %}" class="dropdown-item">My WishList</a>
+              <a href="{% url 'cart:addhistory' %}" class="dropdown-item">Order History</a>
               <a href="{% url 'shop:logout' %}" class="dropdown-item">Logout</a>
             </div>
           </div>
