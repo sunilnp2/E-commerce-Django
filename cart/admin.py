@@ -18,4 +18,8 @@ class WishListAdmin(admin.ModelAdmin):
 admin.site.register(WishList, WishListAdmin)
 admin.site.register(Contact)
 
+class OrderHistryAdmin(admin.ModelAdmin):
+    list_display = ('username', 'item', 'price', 'quantity', 'total', 'paymemnt_method')
+    list_display_links = ('username', 'item', 'price', 'quantity', 'total', 'paymemnt_method')
+admin.site.register(OrderHistry)
 

@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 from django.core import validators
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-# from .models import *
+from .models import *
 
 def checkalpha(value):
     # if value.startswith("," | "!" | "." | "/" | "<" | ">" | "{"):
         # raise forms.ValidationError("This is invalid")
     if value.isalpha() == False:
-        raise forms.ValidationError('This is Invalid.😡')
+        raise forms.ValidationError('This is Invalid.')
 
 def checkuserame(value):
     if value.isalnum() == False:
@@ -21,6 +21,9 @@ def checkuserame(value):
 def checkemail(value):
     if User.objects.filter(email = value).exists():
         raise forms.ValidationError("This email is already taken try another")
+# def validusername(value):
+#     if User.objects.filter(username = value).exists:
+#         raise forms.ValidationError("Username is inorrect")
 
 class LoginForm(AuthenticationForm):
     username = forms.CharField(label = "Enter username:",
@@ -39,9 +42,9 @@ class LoginForm(AuthenticationForm):
 class SignupForm(UserCreationForm):
     password1 = forms.CharField(label = 'Enter Password:',
      widget = forms.PasswordInput(attrs={'class':'input'}),
-     error_messages= {'required':'This Password1 is required'})
-    password2 = forms.CharField(label = 'Password Again', widget = forms.PasswordInput(attrs={'class':'input'}),
      error_messages= {'required':'This Password is required'})
+    password2 = forms.CharField(label = 'Password Again', widget = forms.PasswordInput(attrs={'class':'input'}),
+     error_messages= {'required':'This Password  is required'})
     first_name = forms.CharField(validators=[checkalpha],
     widget = forms.TextInput(attrs={'class':'input'}),
      error_messages= {'required':'First Name is required'})
@@ -53,7 +56,7 @@ class SignupForm(UserCreationForm):
     error_messages= {'required':'This Email is required'})
     username = forms.CharField(validators=[checkuserame],max_length=50,min_length=4,
     widget= forms.TextInput(attrs={'class':'input'}),
-    error_messages={'required':'Enter Username'})
+    error_messages={'required':'Username is required '})
     class Meta:
         model = User
         fields = ('username','first_name','last_name','email')
@@ -84,3 +87,10 @@ class ChangePasswordForm(SetPasswordForm):
      widget= (forms.PasswordInput(attrs= {'class':'input'})),
      error_messages={'required':'This is required'})
     fields = '__all__'
+
+
+class ProfileForm(forms.Form):
+    # pp = forms.CharField(label= "Upload Your Profile", widget=(forms.ImageField))
+    class Meta:
+        model = Profile
+        fields = ('pp')

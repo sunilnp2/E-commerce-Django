@@ -10,9 +10,9 @@
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead class="thead-dark">
-                                        <h3 style = "font-weight:bold; float:right; border:2px solid blue;">
-                                            <a class='fas fa-angle-double-right' style = "color:blue; " href = "{% url 'shop:home' %}">
-                                                Add Another Product</a>
+                                        <h3 style = "font-weight:bold; float:right;">
+                                            <button class ="btn"><a class='fas fa-angle-double-right' style = "color:blue; font-size:20px; " href = "{% url 'shop:home' %}">
+                                                Add Another Product</a></button>
                                             </h3>
                                         <tr>
                                             <th>Product</th>
@@ -34,11 +34,13 @@
                                             </td>
                                             <td>{{wish.items.price}}</td>
                                             <td>
-                                                <div class="qty">
-                                                    <!-- <button class="btn-minus"><a href="{% url 'cart:wish-list-dec' wish.slug %}"><i class="fa fa-minus"></i></a></button> -->
+                                                {{wish.quantity}}
+                                                {% comment %} <div class="qty">
+                                                    <!-- <button class="btn-minus"><a href="{% url 'cart:wish-list-dec' wish.slug %}"><i class="fa fa-minus"></i></a></button> 
                                                     <input type="text" value="{{wish.quantity}}">
+                                                    {% comment %} <p> {{wish.quantity}}</p> {% endcomment %}
                                                     <!-- <button class="btn-plus"><a href="{% url 'cart:wish-list-inc' wish.slug %}"><i class="fa fa-plus"></i></a></button> -->
-                                                </div>
+                                                {% comment %} </div> {% endcomment %}  
                                             </td>
                                             <td><a href="{% url 'cart:add-to-cart' wish.slug %}" style="text-decoration: none;"><button class="btn-cart">Add to Cart </button></a></td>
                                             <td><a href="{% url 'cart:wish-list-del' wish.slug %}"><button><i class="fa fa-trash"></i></button></a></td>
@@ -47,7 +49,7 @@
                                         {% else %}
                                         <td colspan="5">
                                         <h4 style="font-weight: bold; color:red;"> Your Wishlist is Empty
-                                        <a class='fas fa-angle-double-right' style="border:4px solid gray; font-size: 1.2em;" href="{% url 'shop:home' %}"> Add Product In Wishlist</a> 
+                                        <a class='fas fa-angle-double-right' style=" font-size: 0.9em; color:blue;" href="{% url 'shop:home' %}"> Add Product In Wishlist</a> 
                                     </h4>
                                         {% endif %}
                                     </td>

@@ -64,7 +64,7 @@
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="#">{{item.name}}</a>
+                                        <a href="{% url 'shop:item_detail' item.slug %}">{{item.name}}</a>
                                         <!-- <div class="ratting">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
@@ -75,7 +75,7 @@
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
-                                            <img src="{{item.image.url}}" width = "300" height = "300" alt="Product Image">
+                                            <img src="{{item.image.url}}" width = "300" height = "220" alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-cart-plus"></i></a>
@@ -87,9 +87,9 @@
                                         {% if item.discounted_price > 0 %}
                                         <h3><span>Rs</span>{{item.discounted_price}}</h3>
                                         {% else %}
-                                        <h3><span>Rs</span>{{item.price}}</h3>
+                                        <h3 style = "font-size:20px; "><span>Rs</span>{{item.price}}</h3>
                                         {% endif %}
-                                        <a class="btn" href=""><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
 
                         </div>
                         {% else %}
-                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px;">
+                        <h3 style="color: red; font-weight:bold; margin-left: 300px; margin-bottom: 20px; display:inline-block">
                              Your Search Not Found !
                         <a class='fas fa-angle-double-right' style = "color:blue;" href = "{% url 'shop:home' %}">
                             Go Home </a>

@@ -166,22 +166,22 @@
                     {% if cart.items.discounted_price > 0 %}
                     <td>Rs{{cart.items.discounted_price}}</td>
                     {% else %}
-                    <td>Rs{{cart.items.price}}</td>
+                    <td>Rs. {{cart.items.price}}</td>
                     {% endif %}
                     <td>
-                      <div class="qty">
+                     {{cart.quantity}}
                         {% comment %}
                         <a href="/cart/dec_cart/{{cart.items.slug}}"><button class="btn-minus">
                             <i class="fa fa-minus"></i></button></a>
                         {% endcomment %}
-                        <input type="text" value="{{cart.quantity}}" />
+                        
                         {% comment %}
                         <a href="/cart/increase_cart/{{cart.items.slug}}"><button class="btn-plus">
                             <i class="fa fa-plus"></i></button></a>
                         {% endcomment %}
                       </div>
                     </td>
-                    <td>{{cart.total}}</td>
+                    <td>Rs. {{cart.total}}</td>
                   </tr>
                   {% endfor %}
                   {% else %}
@@ -201,47 +201,57 @@
           <div class="cart-page-inner">
             <div class="row">
               <div class="col-md-12">
+                <p style = "width:70%; height:auto; margin:5px auto; font-size:14px; font-style:italic; color:red; text-align:center; background-color: bisque; border-radius: 40px; ">
+                  {% if messages %}
+                  {% for mess in messages%}
+                  {{mess}}
+                  {% endfor %}
+                  {% endif %}
+                 </p>
+<form action="{% url 'cart:payment' %}" method="post" >
+  {% csrf_token %}
+  <div class="col-lg-12">
+    <div class="checkout-inner">
+      {% if request.user.is_authenticated %}
+      <div class="billing-address">
+        <h2>Billing Address</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <label>First Name :</label>
+            <input class="form-control" type="text" placeholder="First Name"
+              value="{{request.user.first_name}}" name='fname' />
+          </div>
+          <div class="col-md-6">
+            <label>Last Name :</label>
+            <input class="form-control" type="text" placeholder="Last Name"
+              value="{{request.user.last_name}}" name='lname' />
+          </div>
+          <!-- <div class="col-md-7">
 
-                <div class="col-lg-12">
-                  <div class="checkout-inner">
-                    {% if request.user.is_authenticated %}
-                    <div class="billing-address">
-                      <h2>Billing Address</h2>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <label>First Name:</label>
-                          <input class="form-control" type="text" placeholder="First Name"
-                            value="{{request.user.first_name}}" name='fname' />
-                        </div>
-                        <div class="col-md-6">
-                          <label>Last Name:</label>
-                          <input class="form-control" type="text" placeholder="Last Name"
-                            value="{{request.user.last_name}}" name='lname' />
-                        </div>
-                        <div class="col-md-7">
-                          <label>E-mail</label>
-                          <input class="form-control" type="text" placeholder="E-mail" value="{{request.user.email}}"
-                            name='email' />
-                        </div>
-                        <div class="col-md-5">
-                          <label>Mobile No</label>
-                          <input class="form-control" type="text" placeholder="Mobile No" value="9805903503"
-                            name='phone' />
-                        </div>
-                        <div class="col-md-12">
-                          <label>Address</label>
-                          <input class="form-control" type="text" placeholder="Address" value="KTM" name='add' />
-                          <div class="col-md-12">
-                            <div class="custom-control custom-checkbox">
-                              <input type="checkbox" class="custom-control-input" id="newaccount" />
+            <label>E-mail</label>
+            <input class="form-control" type="text" placeholder="E-mail" value="{{request.user.email}}"
+              name='email' />
+          </div> -->
+          <div class="col-md-7">
+            <label>Address :</label>
+            <input class="form-control" type="text" placeholder="Enter Full Address" value = "kathmandu,"  name='add' />
+            <div class="col-md-12">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="newaccount" />
 
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {% endif %}
-                    </div>
-                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-5">
+            <label>Mobile No :</label>
+            <input class="form-control" type="text" placeholder="98********"
+              name='phone' />
+          </div>
+          
+        </div>
+        {% endif %}
+      </div>
+    </div>
                   {% if my_cart %}
                   <div class="cart-summary">
                     <div class="cart-content">
@@ -259,8 +269,8 @@
                           id="payment-4"
                           name="payment"
                         />
-                        <label class="custom-control-label" for="payment-4"
-                          ><button id="payment-button">Pay with Khalti</button>
+                        <label class="custom-control-label" for="payment-4" id = "payment-button">
+                          Pay with Khalti
                           </label
                         >
                       </div>
@@ -279,16 +289,17 @@
                     <div class="cart-btn">
                       <div style = "display: inline;">
                       <a href="{% url 'cart:cart' %}">
-                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Go
-                       Cart</button></a> 
+                      <h3 class = "btn" style="width: 45%; height:50px; margin-right:20px; margin-top:7px; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Back to
+                       Cart</h3>
                        <a href="{% url 'cart:payment' %}" style="text-decoration:none;">
-                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Place Order</button>
+                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;" type="submit">Place Order</button>
                       </a>
                     </div>
                     </div>
                   </div>
                   {% endif %}
                 </div>
+              </form>
               </div>
             </div>
           </div>

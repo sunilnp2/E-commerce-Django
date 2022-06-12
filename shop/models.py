@@ -45,8 +45,8 @@ class Brand(models.Model):
 
 class Item(models.Model):
     name = models.CharField(max_length=400)
-    price = models.IntegerField()
-    discounted_price = models.IntegerField(default=0)
+    price = models.PositiveBigIntegerField()
+    discounted_price = models.PositiveBigIntegerField(default=0)
     image = models.ImageField(upload_to= 'media')
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
@@ -71,6 +71,12 @@ class Review(models.Model):
 
     def __str__(self):
         return self.name
+
+
+    # model for profile
+class Profile(models.Model):
+    pp = models.ImageField(upload_to= 'media')
+    
 
 
 

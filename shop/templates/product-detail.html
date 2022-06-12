@@ -30,8 +30,8 @@
 
                                     </div>
                                     <div class="product-slider-single-nav normal-slider">
-                                        {% for hot in hots %}
-                                        <div class="slider-nav-img"><img src="{{hot.image.url}}" alt="Product Image"></div>
+                                        {% for hot in cat_view %}
+                                        <div class="slider-nav-img"><a href = "{% url 'shop:item_detail' hot.slug %}"><img src="{{hot.image.url}}" height = "50" width = "50" alt="Product Image" style = "margin:1px 1px"></a></div>
 
                                         {% endfor %}
                                     </div>

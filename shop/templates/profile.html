@@ -35,10 +35,12 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt5X5rc0XFVIHJh6BqL06E9VAGaJG3P8rPZQ&usqp=CAU" height:300px width:200px alt=""/ >
+                            {% for p in pp %}
+                            <img src="https://www.seekpng.com/png/full/114-1149972_avatar-free-png-image-avatar-png.png" height:200px width:150px alt=""/ >
+                            {% endfor %}
                             <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
+                                {% comment %} <input type="file" name="file"/> {% endcomment %}
+                                {% comment %} <a href = "{% url 'shop:editprofile'%}" Change Photo </a> {% endcomment %}
                             </div>
                         </div>
                     </div>
@@ -48,10 +50,10 @@
                                       {{user.first_name}} {{user.last_name}} &nbsp &nbsp
                                     </h5>
                                     <h6>
-                                        Web Developer and Designer <br>
-                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:cart' %}"> MyCart</a></button>
-                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:orders' %}">My Orders</a></button>
-                                        <button style="background-color:lightgray; color: red;"><a style=" font-weight:bold; text-decoration: none; color: red;" href = "{% url 'cart:wishlist' %}">My WishList</a></button>
+                                        <p style = "margin-bottom:2px;">Web Developer and Designer</p> <br>
+                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: blue;" href = "{% url 'cart:cart' %}"> MyCart</a></button>
+                                        <button style="background-color:lightgray;"> <a style=" font-weight:bold; text-decoration: none; color: blue;" href = "{% url 'cart:orders' %}">My Orders</a></button>
+                                        <button style="background-color:lightgray; color: blue;"><a style=" font-weight:bold; text-decoration: none; color: blue;" href = "{% url 'cart:wishlist' %}">My WishList</a></button>
                                     </h6>
                                     <p class="proile-rating">Address : <span>Kathmandu</span>
                                     </p>

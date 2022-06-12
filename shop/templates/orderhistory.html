@@ -136,8 +136,8 @@
                                     </tr>
                                 </thead>
                                 <tbody class="align-items-center" >
-                                    {% if orderstatus %}
-                                    {% for os in orderstatus %}
+                                    {% if history_items %}
+                                    {% for os in history_items %}
                                     <tr>
                                         <td style="text-align: center; color: rgb(45, 3, 151);">
                                             <div class="img">
@@ -205,8 +205,8 @@
                                     {% endfor %}
                                     {% else %}
                                     <td colspan="5" style="color:red; font-weight: bold; text-align: center; font-size: 1.5em;">
-                                        You are not ordered anything 
-                                    <a class='fas fa-angle-double-right' style='font-size:1.3em; border:2px solid gray;' href="{% url 'shop:home' %}">Add Products</a>
+                                        Your Order Histry is empty
+                                    {% comment %} <a class='fas fa-angle-double-right' style='font-size:1.3em; border:2px solid gray;' href="{% url 'shop:home' %}">Add Products</a> {% endcomment %}
                                 </td>
                                     {% endif %}
                                 </tbody>

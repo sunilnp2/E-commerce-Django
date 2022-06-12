@@ -5,17 +5,18 @@ from django.shortcuts import render, redirect
 from shop.models import Item
 from django.core.mail import EmailMessage
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 # from shop.views import 
 # Create your views here.
 
 # @method_decorator(login_required)
 # from django.contrib.auth.decorators
 from django.contrib.auth.decorators import login_required
-
+# from django.views.decorators.http import require_GET, require_POST
 
 # ---------------------------Cart Start view-------------------------------------------
-
-@login_required()
+@login_required
+# @require_POST
 def addcart(request,slug):
         username = request.user.username
         price = Item.objects.get(slug = slug).price
@@ -160,33 +161,91 @@ def checkout(request):
                 grand_total = shipping_cost + amount
             # self.views['cart_total'] = (grand_total, amount)
     checkuser  = User.objects.all()
+    
+    
     # return render(reque st, 'checkout.html', self.views)
     return render(request,'mycheckout.html',{'my_cart':mycart,'total':amount, 'grand_total':grand_total, 'user':checkuser})
 
 
 def payment(request):
     username = request.user.username
-    cart = Cart.objects.filter(username = username , checkout = False)
-    for c in cart:
-            OrderItem(username = username, item = c.items , price = c.items.price, quantity = c.quantity , total = c.total).save()
-            c.delete()
-            return redirect('cart:orders')
+    email = request.user.email
+    if request.method == "POST": 
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        add = request.POST.get('add')
+        phone = request.POST.get('phone')
+
+        if not fname:
+            messages.error(request,"This field is required !")
+            return redirect('cart:checkout') 
+
+        elif fname.isalpha() == False:
+            return redirect('cart:checkout') 
+            messages.error(request, "You can't input digit in name !")
+            return redirect('cart:checkout') 
+            
+
+        elif not lname:
+            messages.error(request,"This field is required !")
+
+        elif lname.isalpha() == False:
+            messages.error(request, "You can't input digit in lastname !")
+            return redirect('cart:checkout') 
+
+        elif not phone:
+            messages.error(request, "You forgot to enter phone !")
+            return redirect('cart:checkout') 
         
+        elif phone.isdigit() == False:
+            messages.error(request, "Phone number must be in digits !")
+
+        elif len(phone) != 10:
+            messages.error(request, "Phone Number must be 10 digits !")
+            return redirect('cart:checkout') 
+        
+        elif not phone.startswith('98'):
+            messages.error(request, "Number must be start with 98 !")  
+
+        elif not add:
+            messages.error(request, "Address field is required !")
+            return redirect('cart:checkout') 
+        
+        elif len(add) < 5:
+            messages.error(request,"Please Enter full Address")
+            return redirect('cart:checkout') 
+ 
+            
+        else:
+            cart = Cart.objects.filter(username = username)
+            for c in cart:
+                OrderItem.objects.create(username = username,
+                        item = c.items,
+                        price = c.items.price,
+                        quantity = c.quantity,
+                        total = c.total,
+                        name = f'{fname} {lname}',
+                        email = email,
+                        address = add,
+                        phone = phone).save()
+                c.delete()
+                return redirect('cart:orders')
+    return redirect('cart:checkout') 
 #----------------------------Checkout end view-------------------------------------------
 
 #----------------------------Order Start view-------------------------------------------
 
 
 def orders(request):
-    user = request.user
-    orderstatus = OrderItem.objects.all()
+    username = request.user.username
+    orderstatus = OrderItem.objects.filter(username = username)
     return render(request, 'orders.html', {'orderstatus':orderstatus})
 
 #----------------------------Order end view-------------------------------------------
 
 
 # ---------------------------wishlist start view-------------------------------------------
-@login_required()
+@login_required
 def add_wishlist(request, slug):
     username = request.user.username
     price = Item.objects.get(slug = slug).price
@@ -250,3 +309,42 @@ class WishListView(BaseView):
 class KhaltiPayView(BaseView):
     def get(self, request,*args, **kwargs):
         return render(request, 'khalti-payment.html')
+
+
+
+
+
+#------------------------------ Order History Section oepn------------------------------------- 
+def addhistory(request):
+    username = request.user.username
+    # email = request.user.email 
+    history = OrderItem.objects.filter(username  = username, status = 'Delivered')
+    for c in history:
+        OrderHistry(username = username,
+                item = c.items,
+                price = c.items.price,
+                quantity = c.quantity,
+                total = c.total,
+                name = c.name,
+                email = c.email,
+                address = c.address,
+                phone = c.phone).save()
+        c.delete()
+        return redirect('cart:history')
+
+
+
+class HistoryView(BaseView):
+    def get(self, request):
+        username = request.user.username
+        self.views['history_items'] = OrderHistry.objects.filter(username = username)
+        return render(request, 'orderhistory.html', self.views)
+
+
+
+
+
+
+
+#------------------------------ Order History Section oepn------------------------------------- 
+

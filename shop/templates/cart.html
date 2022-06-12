@@ -26,9 +26,9 @@
                                         {% for mess in messages%}
                                         <center style="color:'red'">{{mess}}</center>
                                         {% endfor %}
-                                        <h4 style = "font-weight:bold; float:right; border:2px solid blue;">
-                                            <a class='fas fa-angle-double-right' style = "color:blue; " href = "{% url 'shop:home' %}">
-                                                Add Another Product</a>
+                                        <h4 style = "font-weight:bold; float:right;">
+                                            <button class = "btn"><a class='fas fa-angle-double-right' style = "color:blue; font-weight:bold; " href = "{% url 'shop:home' %}">
+                                                Add Another Product</a></button>
                                             </h4>
                                         <tr>
                                             <th>Product</th>
@@ -95,7 +95,7 @@
                                         </div>
                                         <!-- {% comment %} {% endfor%} {% endcomment %} -->
                                         <div class="cart-btn" style="display: flex;">
-                                            <button class = "d-inline">Update Cart</button>
+                                            <button class = "d-inline"><a href = "{% url 'shop:home' %}">Update Cart</a></button>
                                             <a href="{% url 'cart:checkout'%}"><button class="d-inline" style="width: 150%;">Checkout</button></a>
                                             
                                         </div>

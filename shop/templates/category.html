@@ -67,11 +67,11 @@
                             <div class="col-md-4">
                                 <div class="product-item">
                                     <div class="product-title">
-                                        <a href="{% url 'shop:item_detail' item.slug %}">{{item.name}}</a>
+                                        <a href="{% url 'shop:item_detail' item.slug %}" style = "font-size:15px">{{item.name}}</a>
                                     </div>
                                     <div class="product-image">
                                         <a href="product-detail.html">
-                                            <img src="{{item.image.url}}" width="300" height = "300" alt="Product Image">
+                                            <img src="{{item.image.url}}" width="300" height = "220" alt="Product Image">
                                         </a>
                                         <div class="product-action">
                                             <a href="{{item.add_to_cart}}"><i class="fa fa-cart-plus"></i></a>
@@ -85,7 +85,7 @@
                                         {% else %}
                                         <h3><span>Rs</span>{{item.price}}</h3>
                                         {% endif %}
-                                        <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
+                                        {% comment %} <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a> {% endcomment %}
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                         </div>
 
                         <!-- Pagination Start -->
-                        <div class="col-md-12">
+                        {% comment %} <div class="col-md-12">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
                                     <li class="page-item disabled">
@@ -109,7 +109,7 @@
                                     </li>
                                 </ul>
                             </nav>
-                        </div>
+                        </div> {% endcomment %}
                         <!-- Pagination Start -->
                     </div>
 

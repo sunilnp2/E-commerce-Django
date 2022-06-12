@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from unicodedata import category
 from urllib import request, response
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -10,7 +11,7 @@ from django.views.generic import View
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate ,login ,logout, update_session_auth_hash
 from django.contrib import auth
-from shop.forms import SignupForm, LoginForm, ChangePasswordForm
+from shop.forms import SignupForm, LoginForm, ChangePasswordForm, ProfileForm
 import time
 # Create your views here.
 
@@ -70,6 +71,10 @@ class ItemSearchView(BaseView):
 class ItemDetailView(BaseView):
     def get(self,request,slug):
         self.views['item_detail'] = Item.objects.filter(slug = slug)
+
+        item = Item.objects.get(slug = slug).category
+        self.views['cat_view'] = Item.objects.filter(category = item)
+
 
         return render(request, 'product-detail.html', self.views)
 
@@ -135,9 +140,9 @@ def login(request):
                 user = auth.authenticate(username = username, password = pw)
                 if user is not None:
                     auth.login(request,user)
-                    return redirect('shop:profile')
+                    return redirect('/')
                 else:
-                    messages.error(request,"Your are not registered")
+                    messages.error(request,"You entered incorrect password")
                     # return redirect('shop:login')
         else:
             fm = AuthenticationForm()
@@ -160,9 +165,21 @@ def login(request):
 def profile(request):
     user = request.user
     if user.is_authenticated:
-        return render(request, 'profile.html')
+        pp = Profile.objects.all()
+        return render(request, 'profile.html', {'pp':pp})
     else:
         return redirect('shop:signup')
+
+def editprofile(request):
+    if request.method == 'POST':
+        fm = ProfileForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            return redirect('shop:profile')
+
+    else:
+        fm = ProfileForm()
+        return render(request, 'editprofile.html', {'form':fm})
    
 
 
@@ -179,6 +196,10 @@ def setcookie(request):
         return response
     else:
         return redirect('shop:login')
+
+# def delcookie(request):
+#     user = request.user
+    
 
 
 def setsession(request):
@@ -204,17 +225,16 @@ def delsession(request):
     return render(request,'index.html')
 
 def signup(request):
-    
         if request.method == "POST":
             fm = SignupForm(request.POST)
             if fm.is_valid():
                 fm.save()
-            # username = fm.cleaned_data['username']
-            # f_name = fm.cleaned_data['first_name']
-            # l_name = fm.cleaned_data['last_name']
-            # email = fm.cleaned_data['email']
-            # pass1= fm.cleaned_data['password1']
-            # pass2= fm.cleaned_data['password2'] 
+                # print(username = fm.cleaned_data['username'])
+                # print(f_name = fm.cleaned_data['first_name'])
+                # print(l_name = fm.cleaned_data['last_name'])
+                # print(email = fm.cleaned_data['email'])
+                # print(pass1= fm.cleaned_data['password1'])
+                # print(pass2= fm.cleaned_data['password2']) 
             
             # reg = User(
             # username = username,
@@ -224,10 +244,10 @@ def signup(request):
             # password = pass1,
             # )
             # reg.save() 
-            fm = SignupForm()
+            # fm = SignupForm()
                 # user = request.user.username
-            messages.success(request, f'You are Registered Successfully ')
-            return redirect('shop:login')
+                messages.success(request,'You are Registered Successfully')
+                return redirect('shop:login')
     
         else:
             fm = SignupForm()
