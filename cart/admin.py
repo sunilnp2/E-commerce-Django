@@ -9,7 +9,7 @@ class CartAdmin(admin.ModelAdmin):
 admin.site.register(Cart, CartAdmin)
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ['username', 'item','price','quantity', 'total', 'status', 'payment_method']
+    list_display = ['username', 'item','price','quantity', 'total', 'status', 'payment_method', 'order_at']
     list_display_links = ['username', 'item','price', 'quantity', 'total', 'status','payment_method']
 admin.site.register(OrderItem, OrderItemAdmin)
 

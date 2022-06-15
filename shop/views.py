@@ -53,6 +53,7 @@ class ItemSearchView(BaseView):
         search = request.GET.get('search', None)
         if search:
             self.views['search_item'] = Item.objects.filter(name__icontains = search)
+            self.views['search'] = search
             # self.views['range-hund'] = Item.objects.filter
             # (Item.price <= 500)
             # self.views['range-thou'] = Item.objects.filter

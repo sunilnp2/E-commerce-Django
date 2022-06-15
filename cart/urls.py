@@ -17,7 +17,7 @@ urlpatterns = [
         path('wish-list-dec/<slug>', wish_dec, name = "wish-list-dec"),
         path('wish-list-del/<slug>', wish_delete, name = "wish-list-del"),
         path('wishlist', WishListView.as_view(), name='wishlist'),
-        path('khalti-pay/', KhaltiPayView.as_view(), name= "khalti-pay"),
+        path('khalti-pay/', KhaltiPay, name= "khalti-pay"),
         path('addhistory', addhistory, name= "addhistory"),
         path('history', HistoryView.as_view(), name = "history"),
     ]

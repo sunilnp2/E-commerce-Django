@@ -113,7 +113,7 @@
             <h3>Welcome {{ user.first_name }}</h3>
             <div class="col-sm-5 border-end">
                 <ul class="list-unstyled">
-                    <li class="btn btn-primary">Your Orders </li>
+                    <li class="btn btn-primary">Your Order History </li>
                    {% comment %} <a href = "{% url 'cart:' %}"> <li class="btn btn-primary">My Order History </li></a> {% endcomment %}
                 </ul>
             </div>
@@ -137,6 +137,8 @@
                                         <th style="text-align: center;">Status</th>
                                         <th style="text-align: center;">Payment Method</th>
                                         <th style="text-align: center;">Add to Cart</th>
+                                        <th style="text-align: center;">Purchased At</th>
+
                                     </tr>
                                 </thead>
                                 <tbody class="align-items-center" >
@@ -208,6 +210,7 @@
 
 
                                         </td>
+                                        <td style="text-align: center; color: rgb(45, 3, 151); font-weight: bold;">Rs. {{os.purchase_at}}</td>
 
                                     </tr>
 

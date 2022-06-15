@@ -1,11 +1,71 @@
-<html>
-<head>
-    <script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
-</head>
-<body>
-    ...
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .animat{
+        /* background-color: rgb(4, 107, 20); */
+        color: rgb(4, 107, 20);
+        font-size: 1.2em;
+        /* display: inline; */
+    position: relative;
+       animation-name: pay;
+       animation-timing-function: ease-in-out;
+       animation-duration: 1.5s;
+       animation-iteration-count: infinite;
+    }
+    @keyframes pay{
+        0%{
+            margin-top:30px;
+            left: -90px;
+            
+        }
+        10%{
+            margin-top:30px;
+            left: -60px;
+            
+        }
+        20%{
+            margin-top:30px;
+            left: -20px;
+
+        }
+        40%{
+            margin-top:30px;
+            left: 0px;
+
+        }
+        60%{
+            margin-top:30px;
+            left: 40ppx;
+        }
+        80%{
+            margin-top:30px;
+            left: 80px;
+        }
+        90%{
+            margin-top:30px;
+            left: 120px;
+        }
+        100%{
+            margin-top:30px;
+
+        }
+    }
+
+    
+</style> 
     <!-- Place this where you need payment button -->
-    <button id="payment-button">Pay with Khalti</button>
+    <div class= "payment" style= "width:100%; height:50vw; display:flex; flex-direction:column; justify-content:center; align-items:center;
+    background-image: url('http://techlekh.com/wp-content/uploads/2020/06/Khalti-app-in-nepali-language.png); ">
+        <div style = "background-color: #FCE77D ; margin-left:800px; margin-bottom:400px; margin-top:50px; width:38%; height:400px; border:5px solid black; border-radius:30px 40px 60px 80px; text-align:center;">
+        <h1 style= "color:#F96167; font-weight:bolder; margin-top:40px;"> Total Amount : {{total}}</h1>
+        <p class = "animat" style= "color:rgb(27, 7, 209); font-weight:bolder; margin-top:30px;">Pay</p>
+        <button class="btn" id="payment-button" style = "font:#F96167; width:30%; height:70px; font-size:2em; font-widget:bold; margin-top:0px;" >Pay Now</button>
+       {% comment %} <h4  style = " background-color:lightgray; font:#F96167; text-align:center; height:70px; font-widget:bold;"> <a href "{% url 'shop:home' %}">Cash On delivery </a></h4> {% endcomment %}
+        {% comment %} <p class = "animat" style= "color:rgb(26, 5, 163); font-weight:bolder; margin-top:10px;">Pay</p> {% endcomment %}
+    </div>
+    </div>
     <!-- Place this where you need payment button -->
     <!-- Paste this code anywhere in you body tag -->
     <script>
@@ -40,10 +100,9 @@
         var btn = document.getElementById("payment-button");
         btn.onclick = function () {
             // minimum transaction amount must be 10, i.e 1000 in paisa.
-            checkout.show({amount: 1000});
+            checkout.show({amount: {{total}}*100});
         }
     </script>
     <!-- Paste this code anywhere in you body tag -->
-    ...
-</body>
-</html>
+    
+{% endblock %}

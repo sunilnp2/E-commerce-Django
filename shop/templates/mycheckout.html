@@ -27,6 +27,7 @@
 
   <!-- Template Stylesheet -->
   <link href=" {% static 'css/style.css' %}" rel="stylesheet">
+  <link href=" {% static 'css/index.css' %}" rel="stylesheet">
 </head>
 
 <body>
@@ -270,8 +271,9 @@
                           class="custom-control-input"
                           id="payment-4"
                           name="payment"
+                          value= "Pay with Khalti"
                         />
-                        <label class="custom-control-label" for="payment-4" id = "payment-button">
+                        <label class="custom-control-label" for="payment-4">
                           Pay with Khalti
                           </label
                         >
@@ -312,42 +314,83 @@
 
 
     <!-- Footer Start -->
-    <div class="footer">
-      <div class="container-fluid">
-        <div class="row" style="background-color:lightgray;">
-          <div class="row payment align-items-center">
-            <div class="footer-widget">
-              <h2>Get in Touch</h2>
-              <div class="contact-info">
-                <p><i class="fa fa-map-marker"></i>E-Store</p>
-                <p><i class="fa fa-envelope"></i>sacsun@gmailcom</p>
-                <p><i class="fa fa-phone"></i>+977983746453</p>
-                <p><i class="fa fa-phone"></i>+977985645754</p>
-              </div>
-            </div>
-          </div>
-
-
-        </div>
-
-        <div class="row payment align-items-center">
-          <div class="col-md-6">
-            <!--                        <div class="payment-method">-->
-            <!--                            <h2>We Accept:</h2>-->
-            <!--                            <img src="{% static 'img/payment-method.png' %}" alt="Payment Method" />-->
-            <!--                        </div>-->
-          </div>
-          <!--                    <div class="col-md-6">-->
-          <!--                        <div class="payment-security">-->
-          <!--                            <h2>Secured By:</h2>-->
-          <!--                            <img src=" {% static 'img/godaddy.svg' %}" alt="Payment Security" />-->
-          <!--                            <img src=" {% static 'img/norton.svg' %}" alt="Payment Security" />-->
-          <!--                            <img src=" {% static 'img/ssl.svg' %}" alt="Payment Security" />-->
-          <!--                        </div>-->
-          <!--                    </div>-->
-        </div>
+    <div class="footer-sm-12" style = "background-color:black; height:25vh; ">
+      <div class="column-sm-20">
+          <h3>Company</h3>
+          <ul>
+              <li>About Us</li>
+              <li>Contact Us</li>
+              <li>Support</li>
+              <li>Blog</li>
+              <li>Sign in</li>
+          </ul>
       </div>
-    </div>
+      <div class="column-sm-20">
+         <h3>Policies</h3> 
+         <ul>
+          <li>Privacy Policy</li>
+          <li>Terms & Conditions</li>
+          <li>Merchant Terms & Conditions</li>
+          <li>Transaction Limits</li>
+      </ul>
+      {% comment %} <h3 class = "business-soln-sm-20">Developers</h3>
+      <ul>
+          <li>API Docs</li>
+          <li>Open Sourcec</li>
+          <li>Servicec API Docs</li>
+      </ul> {% endcomment %}
+      {% comment %} <h3 class = "business-soln-sm-20">Khalti Programs</h3>
+      <ul>
+          <li>Smart Chhori</li>
+          <li>Khalti Quiz</li>
+      </ul> {% endcomment %}
+      </div>
+      <div class="column-sm-20">
+         <h3>Help & Support</h3> 
+         <ul>
+          <li>Toll Free: 1660-01-5-8888</li>
+          <li>Viber ( Chat Only ) Support: 9801165561
+          </li>
+          <li>support@khalti.com
+          </li>
+          <li>Phone: 01-5970017</li>
+      </ul>
+      </div>
+      <div class="column-sm-20">
+         <h3>Services</h3> 
+         <ul>
+          <li>Cash On Delivery
+          </li>
+          <li>Return Avaliable</li>
+          <li>Khalti Payment</li>
+          <li></li>
+          {% comment %} <li>Khanepani</li>
+          <li>Insurance</li>
+          <li>Flight</li>
+          <li>Movie</li>
+          <li>Ride<li>
+          <li>Eventes</li> {% endcomment %}
+      </ul>
+      </div>
+      <div class="column-sm-20">
+         <!-- <h3>Services</h3>  -->
+         <img src="{% static 'img/logo.png' %}" alt="">
+
+         <h5 class="connect-12">
+          connect with us
+         </h5>
+         <p>
+         <a href="#" class="fa fa-facebook"></a>
+         <a href="#" class="fa fa-instagram"></a>
+         <a href="#" class="fa fa-linkedin"></a>
+      </p>
+         <p>
+             <a href="#" class="fa fa-twitter"></a>
+          <!-- <a href="#" class="fa fa-google"></a> -->
+          <a href="#" class="fa fa-youtube"></a>
+      </p>
+      </div>
+  </div>
     <!-- Footer End -->
 
     <!-- Footer Bottom Start -->

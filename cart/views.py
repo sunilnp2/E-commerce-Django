@@ -170,20 +170,22 @@ def checkout(request):
 def payment(request):
     username = request.user.username
     email = request.user.email
+    history = ""
     if request.method == "POST": 
         fname = request.POST.get('fname')
         lname = request.POST.get('lname')
         add = request.POST.get('add')
         phone = request.POST.get('phone')
+        pay_method = request.POST.get('payment')
 
         if not fname:
             messages.error(request,"first name is required !")
-            return redirect('cart:checkout') 
+            # return redirect('cart:checkout') 
 
         elif fname.isalpha() == False:
             return redirect('cart:checkout') 
             messages.error(request, "You can't input digit in name !")
-            return redirect('cart:checkout') 
+            # return redirect('cart:checkout') 
             
 
         elif not lname:
@@ -191,29 +193,37 @@ def payment(request):
 
         elif lname.isalpha() == False:
             messages.error(request, "You can't input digit in lastname !")
+            # return redirect('cart:checkout') 
+
+        elif not add:
+            messages.error(request, "Address field is required !")
             return redirect('cart:checkout') 
+        
+        elif len(add) < 11:
+            messages.error(request,"Please Enter full Address")
+            # return redirect('cart:checkout') 
 
         elif not phone:
             messages.error(request, "You forgot to enter phone Number !")
-            return redirect('cart:checkout') 
+            # return redirect('cart:checkout') 
         
         elif phone.isdigit() == False:
             messages.error(request, "Phone number must be in digits !")
 
         elif len(phone) != 10:
             messages.error(request, "Phone Number must be 10 digits !")
-            return redirect('cart:checkout') 
+            # return redirect('cart:checkout') 
         
         elif not phone.startswith('98'):
             messages.error(request, "Number must be start with 98 !")  
-
-        elif not add:
-            messages.error(request, "Address field is required !")
-            return redirect('cart:checkout') 
         
-        elif len(add) < 5:
-            messages.error(request,"Please Enter full Address")
-            return redirect('cart:checkout') 
+        elif not pay_method:
+            messages.error(request, "Default payment method id COD. You can choose another")
+        
+        elif pay_method == "Pay with Khalti":
+            return redirect('cart:khalti-pay')
+
+        
  
             
         else:
@@ -230,6 +240,7 @@ def payment(request):
                         phone = phone).save()
                 c.delete()
             return redirect('cart:orders')
+
     return redirect('cart:checkout') 
 #----------------------------Checkout end view-------------------------------------------
 
@@ -306,9 +317,22 @@ class WishListView(BaseView):
 
 #------------------------------ Payment with khalti------------------------------------- 
 
-class KhaltiPayView(BaseView):
-    def get(self, request,*args, **kwargs):
-        return render(request, 'khalti-payment.html')
+def KhaltiPay(request):
+    
+             user = request.user
+             username = request.user.username
+             mycart = Cart.objects.filter(username = username,checkout = False)
+             amount = 0
+             shipping_cost = 0
+             grand_total = 0
+             cart_product = [p for p in Cart.objects.all() if p.username == username]
+             if cart_product:
+                for p in cart_product:
+                    temamount = (p.quantity * p.items.price)
+                    amount += temamount
+                    grand_total = shipping_cost + amount
+             total = grand_total
+             return render(request, 'khalti-payment.html', {'total':total})
 
 
 

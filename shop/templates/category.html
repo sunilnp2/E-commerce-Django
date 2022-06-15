@@ -87,7 +87,7 @@
                                         {% else %}
                                         <h3><span>Rs</span>{{item.price}}</h3>
                                         {% endif %}
-                                        {% comment %} <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a> {% endcomment %}
+                                        <a class="btn" href="{% url 'cart:add-to-cart' item.slug %}"><i class="fa fa-shopping-cart"></i>Buy Now</a>
                                     </div>
                                 </div>
                             </div>
