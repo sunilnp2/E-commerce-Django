@@ -20,12 +20,12 @@ from django.conf.urls.static import static
 
 
 # for api router------------------------------------------------
-from rest_framework.routers import DefaultRouter
-from shop.views import ItemModelViewSet, UserModelViewSet
-router = DefaultRouter()
+# from rest_framework.routers import DefaultRouter
+# from shop.views import ItemModelViewSet, UserModelViewSet
+# router = DefaultRouter()
 
-router.register('itemapi',ItemModelViewSet, basename='itemapi')
-router.register('userapi',UserModelViewSet, basename='userapi')
+# router.register('itemapi',ItemModelViewSet, basename='itemapi')
+# router.register('userapi',UserModelViewSet, basename='userapi')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

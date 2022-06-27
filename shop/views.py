@@ -281,41 +281,41 @@ def password_change(request):
 
 # ---------------------------------------API-------------------------------------------
 
-from django.urls import path, include
-from django.contrib.auth.models import User
-from rest_framework import routers, serializers, viewsets
-from .models import *
-from .serializers import *
-from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAuthenticated
-from shop.mypaginations import MyPageNumPagination, MyCursorPagination
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import SearchFilter
-# ViewSets define the view behavior.
-class ItemModelViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = Item.objects.all()
-    serializer_class = ItemSerializer
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated   ]
-    pagination_class = MyCursorPagination
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['name']
+# from django.urls import path, include
+# from django.contrib.auth.models import User
+# from rest_framework import routers, serializers, viewsets
+# from .models import *
+# from .serializers import *
+# from rest_framework.authentication import SessionAuthentication
+# from rest_framework.permissions import IsAuthenticated
+# from shop.mypaginations import MyPageNumPagination, MyCursorPagination
+# from django_filters.rest_framework import DjangoFilterBackend
+# from rest_framework.filters import SearchFilter
+# # ViewSets define the view behavior.
+# class ItemModelViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
+#     authentication_classes = [SessionAuthentication]
+#     permission_classes = [IsAuthenticated   ]
+#     pagination_class = MyCursorPagination
+#     # filter_backends = [DjangoFilterBackend]
+#     # filterset_fields = ['name']
 
-    filter_backends = [SearchFilter]
-    # search_fields = ['name']
-    search_fields = ['^name']
+#     filter_backends = [SearchFilter]
+#     # search_fields = ['name']
+#     search_fields = ['^name']
 
-# api for user -------------------
-from shop.mypaginations import UserCursorPagination
-class UserModelViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    authentication_classes = [SessionAuthentication]
-    permission_classes = [IsAuthenticated]
-    filter_backends = [SearchFilter]
-    search_fields = ['name']
-    pagination_class = UserCursorPagination
-    # ordering
+# # api for user -------------------
+# from shop.mypaginations import UserCursorPagination
+# class UserModelViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+#     authentication_classes = [SessionAuthentication]
+#     permission_classes = [IsAuthenticated]
+#     filter_backends = [SearchFilter]
+#     search_fields = ['name']
+#     pagination_class = UserCursorPagination
+#     # ordering
 
 
 
