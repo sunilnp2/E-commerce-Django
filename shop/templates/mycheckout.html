@@ -296,7 +296,7 @@
                       <h3 class = "btn" style="width: 45%; height:50px; margin-right:20px; margin-top:7px; background-color: rgb(212, 100, 100); color:black; font-weight:bold;">Back to
                        Cart</h3>
                        <a href="{% url 'cart:payment' %}" style="text-decoration:none;">
-                      <button style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;" type="submit">Place Order</button>
+                      <button id="place" style=" width: 42%; background-color: rgb(212, 100, 100); color:black; font-weight:bold;" type="submit">Place Order</button>
                       </a>
                     </div>
                     </div>
@@ -311,6 +311,12 @@
       </div>
     </div>
     <!-- Cart End -->
+    <script>
+      function order() {
+        // order = document.getElementById('place')
+      alert("Your Order has Been Sent");
+      }
+    </script>
 
 
     <!-- Footer Start -->

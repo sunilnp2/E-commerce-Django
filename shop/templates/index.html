@@ -69,7 +69,7 @@
            {% for brand in brands %}
                    <div class="brand-item" style="margin-left:100px;"><a href="/brand/{{brand.name}}"> 
                        <p style="color: black; font-weight:bold;">{{brand.name}}</p>
-                       <img src="{{brand.image.url}}" alt="" width="60" height="50"></a></div>
+                       <img src="{{brand.image.url}}" alt="" width="70" height="50"></a></div>
                    {% endfor %}
 
 
@@ -218,7 +218,7 @@
         <div class="featured-product product">
             <div class="container-fluid">
                 <div class="section-header">
-                    <h1>Recent Product</h1>
+                    <h1>Our Products</h1>
                 </div>
                 <div class="row align-items-center product-slider product-slider-4">
                     {% for hot in hots %}
@@ -260,7 +260,7 @@
             </div>
         </div>
         <!-- Featured Product End -->       
-        
+{% comment %}         
         <!-- Newsletter Start -->
         <div class="newsletter">
             <div class="container-fluid">
@@ -276,10 +276,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> {% endcomment %}
         <!-- Newsletter End -->        
         
-        <!-- Recent Product Start -->
+        <!-- Recent Product Start 
         <div class="recent-product product">
             <div class="container-fluid">
                 <div class="section-header">
@@ -323,7 +323,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Recent Product End -->
         
         <!-- Review Start -->

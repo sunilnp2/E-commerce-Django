@@ -18,6 +18,15 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+# for api router------------------------------------------------
+from rest_framework.routers import DefaultRouter
+from shop.views import ItemModelViewSet, UserModelViewSet
+router = DefaultRouter()
+
+router.register('itemapi',ItemModelViewSet, basename='itemapi')
+router.register('userapi',UserModelViewSet, basename='userapi')
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('shop.urls', namespace= 'shop')),
@@ -25,6 +34,12 @@ urlpatterns = [
     # path('khalti/', include('khalti.urls')),
     # path('accounts/', include('django.contrib.auth.urls')),
     # path('api/', include('shop.api_urls')),
+    # url for api ----------------------------------------------
+    # path('api/', include(router.urls)),
+
+    # for external api folder-----------------------------
+    path('api/', include('api.urls')),
+    path('auth/', include('rest_framework.urls', namespace='studapi')),
 
 ]
 if settings.DEBUG:

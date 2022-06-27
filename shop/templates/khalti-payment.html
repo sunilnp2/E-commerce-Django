@@ -11,7 +11,7 @@
     position: relative;
        animation-name: pay;
        animation-timing-function: ease-in-out;
-       animation-duration: 1.5s;
+       animation-duration: 4s;
        animation-iteration-count: infinite;
     }
     @keyframes pay{
@@ -60,7 +60,8 @@
     background-image: url('http://techlekh.com/wp-content/uploads/2020/06/Khalti-app-in-nepali-language.png); ">
         <div style = "background-color: #FCE77D ; margin-left:800px; margin-bottom:400px; margin-top:50px; width:38%; height:400px; border:5px solid black; border-radius:30px 40px 60px 80px; text-align:center;">
         <h1 style= "color:#F96167; font-weight:bolder; margin-top:40px;"> Total Amount : {{total}}</h1>
-        <p class = "animat" style= "color:rgb(27, 7, 209); font-weight:bolder; margin-top:30px;">Pay</p>
+        <p class = "animat" style= "color:rgb(27, 7, 209); font-weight:bolder; margin-top:30px;">Pay {{total}}</p>
+        <button class="btn" style = "font:#F96167; width:40%; height:70px; font-size:1em; margin-top:0px;" ><a href = "{% url 'cart:checkout' %}">Back Checkout</a></button>
         <button class="btn" id="payment-button" style = "font:#F96167; width:30%; height:70px; font-size:2em; font-widget:bold; margin-top:0px;" >Pay Now</button>
        {% comment %} <h4  style = " background-color:lightgray; font:#F96167; text-align:center; height:70px; font-widget:bold;"> <a href "{% url 'shop:home' %}">Cash On delivery </a></h4> {% endcomment %}
         {% comment %} <p class = "animat" style= "color:rgb(26, 5, 163); font-weight:bolder; margin-top:10px;">Pay</p> {% endcomment %}

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>E Store - eCommerce</title>
+        <title>E Store</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="eCommerce HTML Template Free Download" name="keywords">
         <meta content="eCommerce HTML Template Free Download" name="description">
@@ -13,8 +13,9 @@
 
         <!-- Google Fonts -->
         {% comment %} <link href = "{% static 'css/index.css' %}"> {% endcomment %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Inter&family=Joan&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> {% endcomment %}
     <link href="https://fonts.googleapis.com/css2?family=Nuosu+SIL&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Nuosu+SIL&display=swap" rel="stylesheet">
@@ -57,14 +58,14 @@
 
         <!-- Nav Bar Start -->
         <div class="nav">
-            <div class="container-fluid">
+            <div class="container-fluid" >
                 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
                     <a href="#" class="navbar-brand">MENU</a>
                     <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse" >
                         <div class="navbar-nav mr-auto">
                             <a href="/" class="nav-item nav-link active">Home</a>
                             {% if user.is_superuser %}
@@ -123,7 +124,7 @@
                     <div class="col-md-6">
                         <form method="GET" action="/search">
                         <div class="search">
-                            <input type="text" placeholder="Search" name="search">
+                            <input type="text" style = "border-radius:15px;" placeholder="Search" name="search">
                             <button type="submit" ><i class="fa fa-search"></i></button>
                         </div>
                             </form>
@@ -219,14 +220,14 @@
                     connect with us
                    </h5>
                    <p>
-                   <a href="#" class="fa fa-facebook" style = "color:white;"></a>
-                   <a href="#" class="fa fa-instagram" style = "color:white;"></a>
-                   <a href="#" class="fa fa-linkedin" style = "color:white;"></a>
+                   <a href="#" class="fa fa-facebook" id = "facebook"></a>
+                   <a href="#" class="fa fa-instagram"></a>
+                   <a href="#" class="fa fa-linkedin"></a>
                 </p>
                    <p>
-                       <a href="#" class="fa fa-twitter"></a>
+                       {% comment %} <a href="#" class="fa fa-twitter"></a> {% endcomment %}
                     <!-- <a href="#" class="fa fa-google"></a> -->
-                    <a href="#" class="fa fa-youtube"></a>
+                    {% comment %} <a href="#" class="fa fa-youtube"></a> {% endcomment %}
                 </p>
                 </div>
             </div>
