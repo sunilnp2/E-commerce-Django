@@ -148,3 +148,18 @@ KHALTI_VERIFY_URL = 'https://khalti.com/api/v2/payment/verify'
 # EMAIL_HOST_PASSWORD : ''
 # EMAIL_USE_TLS : True
 # EMAIL_USE_SSL : False
+
+# api thorttling for global
+# REST_FRAMEWORK = {
+#     'DEFAULT_THROTTLE_CLASSES':[
+#         'rest_framework.throttling.AnonRateThrottle',
+#         'rest_framework.throttling.UserRateThrottle',
+#     ]
+# }
+
+REST_FRAMEWORK = {
+    'DEFAULT_THROTTLE_RATES':{
+        'anon': '5/minute',
+        'user':'10/minute',
+    }
+}

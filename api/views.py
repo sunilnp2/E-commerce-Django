@@ -7,6 +7,7 @@ from rest_framework.filters import SearchFilter
 from shop.models import *
 from api.serializers import *
 from api.mypaginations import *
+from rest_framework.throttling import UserRateThrottle, AnonRateThrottle
 
 class ItemModelViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Item.objects.all()
@@ -16,6 +17,7 @@ class ItemModelViewSet(viewsets.ReadOnlyModelViewSet):
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAuthenticated]
     pagination_class = myCursorPagination
+    throttle_classes = [UserRateThrottle, AnonRateThrottle]
 
 
 
